@@ -7,7 +7,6 @@ const handler = async (req, res) => {
   const data = await xata.db.Products.search(req.body.value, {
     fuzziness: 1,
     prefix: "phrase",
-    source: ["*", "brand.*"] 
   });
   res.status(200).json({
     data,

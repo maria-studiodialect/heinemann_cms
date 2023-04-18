@@ -10,6 +10,8 @@ import axios from "axios";
 function ProductsSimple() {
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState([])
+  const [fullProducts, setFullProducts] = useState([])
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
@@ -17,6 +19,7 @@ function ProductsSimple() {
         const res = await fetch(`/api/products/getProducts`)
         const { data } = await res.json()
         setProducts(data)
+        setFullProducts(data)
       } catch (error) {
         console.log(error)
       }
@@ -26,10 +29,21 @@ function ProductsSimple() {
     fetchData()
   }, [])
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     const { value } = e.target;
-    const data = await axios.post(`/api/products/search`, { value });
-    setProducts(data?.data?.data);
+    const searchQuery = value.toLowerCase();
+    
+    if (searchQuery.trim() === '') {
+      // if search query is empty, reset products to full list
+      setProducts(fullProducts);
+    } else {
+      // otherwise, filter the products based on search query
+      const filteredProducts = fullProducts.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery) ||
+        product.brand.title.toLowerCase().includes(searchQuery)
+      );
+      setProducts(filteredProducts);
+    }
   };
 
   return (
@@ -45,7 +59,7 @@ function ProductsSimple() {
           <AddProduct />
         </div>
       </header>
-      <ProductHeader />
+      <ProductHeader simple={true} />
       {loading ? (
         <ProductItemsSkeleton />
       ) : (

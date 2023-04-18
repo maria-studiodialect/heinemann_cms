@@ -39,7 +39,7 @@ function EditableProduct({ mainProduct }) {
 
   return (
     <div>
-      <div className='flex justify-between mx-40 mt-10'>
+      <div className='flex justify-between mx-40'>
       <div className='bg-gray-100 px-10 rounded-t-xl py-2 font-bold'>RFID
       {isEditing.RFID ? (
           <input
@@ -63,7 +63,7 @@ function EditableProduct({ mainProduct }) {
             />
       </div>
       </div>
-      <div className="mx-40 flex justify-between items-center bg-black text-white py-10 rounded-xl">
+      <div className="mx-40 flex justify-between items-center bg-black text-white py-10 rounded-xl mb-20">
         <div>
                 {product.images.map((item, i) => (
                     <div key={i} className="relative w-52 h-32">
