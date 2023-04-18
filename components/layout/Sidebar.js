@@ -29,10 +29,15 @@ const Sidebar = () => {
             </div>
           </Link>
           <div>
+          {router.pathname !== '/products_simple' && (
+            <>
           <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-1.5 rounded-full hover:bg-black hover:text-white mx-2`}>Locations</Link>
           <Link href={'/brands'} className={`${linkClass('/brands')} px-4 py-1.5 rounded-full hover:bg-black hover:text-white mx-2`}>Brands</Link>
+          </>
+          )
+          }
           <Link href={'/products'} className={`${linkClass('/products')} px-4 py-1.5 rounded-full hover:bg-black hover:text-white mx-2`}>Products</Link>
-          <Link href={'/analytics'} className={`${linkClass('/analytics')} px-4 py-1.5 rounded-full hover:bg-black hover:text-white mx-2`}>Analytics</Link>
+          {router.pathname !== '/products_simple' && <Link href={'/analytics'} className={`${linkClass('/analytics')} px-4 py-1.5 rounded-full hover:bg-black hover:text-white mx-2`}>Analytics</Link>}
 
           </div>
         </nav>

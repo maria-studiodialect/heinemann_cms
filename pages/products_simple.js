@@ -55,8 +55,8 @@ function ProductsSimple() {
   )
 }
 
-export default Products
+export default ProductsSimple
 
-Products.getLayout = function getLayout(page) {
-  return <Layout meta={{ name: 'Products' }}>{page}</Layout>
+ProductsSimple.getLayout = function getLayout(page) {
+  return <Layout meta={{ name: 'ProductsSimple' }}>{page}</Layout>
 }
