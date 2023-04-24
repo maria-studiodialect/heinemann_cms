@@ -3,20 +3,12 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import Button from '../common/Button'
 import Input from '../common/Input'
 import FormSection from './Section'
-import MediaUpload from './MediaUpload'
-import ThumbnailUpload from './ThumbnailUpload'
 import {IoIosAddCircle} from 'react-icons/io'
 import {AiFillDelete} from 'react-icons/ai'
+import MediaUpload from './MediaUpload'
 
 const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
-
-  const [attributes, setAttributes] = useState(defaultValues.attributes || []);
   const [brands, setBrands] = useState([]);
-
-
-  useEffect(() => {
-    setAttributes(defaultValues.attributes || []);
-  }, [defaultValues.attributes]);
 
   const {
     register,
@@ -30,9 +22,10 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     if (defaultValues) {
       setValue('title', defaultValues.title)
       setValue('description', defaultValues.description)
-      setValue('RFID', defaultValues.RFID)
       setValue('images', defaultValues.images)
       setValue('product_type', defaultValues.product_type)
+      setValue('attributes', defaultValues.attributes)
+      setValue('brand', defaultValues.brand?.title)
     }
   }, [defaultValues, setValue])
 
@@ -41,13 +34,6 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     reset()
   })
 
-  const addAttribute = () => {
-    setAttributes([...attributes, '']);
-  };
-
-  const removeAttribute = (index) => {
-    setAttributes(attributes.filter((_, i) => i !== index));
-  };
 
   useEffect(() => {
     fetchBrands();
@@ -66,9 +52,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     <div {...props} className="flex flex-col space-y-6">
       <form>
         <FormSection defaultOpen={true} title={'Product Information'}>
-          
-          <div className='grid grid-cols-2 gap-5'>
-          <Input
+        <Input
             name="title"
             label="Product Title"
             type="text"
@@ -80,17 +64,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
               },
             })}
           />
-          <div className='mb-2'>
-          <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Brand</label>
-          <select {...register('brand')} className='border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2'>
-            {brands.map((brand, index) => (
-              <option key={index} value={brand.id}>
-                {brand.title}
-              </option>
-            ))}
-          </select>
-          </div>
-          </div>
+          <div className='grid grid-cols-2 gap-5'>
           <Input
             name="product_type"
             label="Product Type"
@@ -121,15 +95,53 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
               placeholder: 'Type 1, Type 2, Type 3',
             }}
           />
+          <div className='mb-2'>
+          <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Brand</label>
+          <select {...register('brand')} name='brand' defaultValue={defaultValues?.brand?.title} className='border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2'>
+            <option disabled value="">Select brand</option>
+            {brands.map((brand, index) => (
+              <option key={index} value={brand.id}>
+                {brand.title}
+              </option>
+            ))}
+          </select>
+          </div>
+          </div>
+          
           <Input
             name="description"
             label="Description"
             type="textarea"
+            textarea={true}
             error={errors.description ? errors.description.message : false}
             register={register('description')}
           />
+          <Input
+            name="attributes"
+            label="Attributes"
+            type="text"
+            error={errors.attributes ? errors.attributes.message : false}
+            info="Separate values with a comma. Ex: 'Sweet & Round, Delicate & Floral'"
+            register={register('attributes', {
+              validate: (value) => value.length > 0 || 'Add at least one attribute',
+            })}
+            attributes={{
+              ...register('attributes', {
+                validate: (value) => value.length > 0 || 'Add at least one attribute',
+                setValueAs: (value) => {
+                  if (typeof value === 'string') {
+                    return value.split(',').map((type) => type.trim())
+                  }
+                  return []
+                },
+              }),
+              type: 'text',
+              placeholder: 'Type 1, Type 2, Type 3',
+            }}
+          />
+            {/*<div>  
           
-          <div>  
+         
           <div className='flex items-center justify-between mb-1'>
             <label htmlFor="brand" className="block text-sm font-medium text-gray-600">Attributes</label>
             <button type="button" onClick={addAttribute} className='text-2xl'>
@@ -153,43 +165,8 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           <div className='bg-gray-100 text-center py-2 rounded-md mb-2'>There are no items.</div>
           }
           </div>
-
-          <div className="flex flex-col items-center md:flex-row md:space-x-2">
-            <Input
-              className=""
-              name="RFID"
-              label="RFID "
-              type="number"
-              multiline
-              error={errors.RFID ? errors.RFID.message : false}
-              register={register('RFID', {
-                required: {
-                  value: true,
-                  message: 'You must add the RFID of your product.',
-                },
-                setValueAs: (v) => parseFloat(v),
-              })}
-            />
-            {/* 
-            <Input
-              className=""
-              name="stock"
-              label="Stock"
-              placeholder="1000"
-              type="number"
-              multiline
-              error={errors.stock ? errors.stock.message : false}
-              register={register('stock', {
-                required: {
-                  value: true,
-                  message: 'You must add the price of your product.',
-                },
-                setValueAs: (v) => parseInt(v),
-              })}
-              
-            />
-            */}
-          </div>
+          */}
+          
         </FormSection>
       </form>
       <FormSection title={'Product Images'}>

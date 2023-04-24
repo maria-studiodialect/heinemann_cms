@@ -59,12 +59,15 @@ function Products() {
           <AddProduct />
         </div>
       </header>
+      
       <ProductHeader />
+      <div className='h-[55vh] overflow-y-scroll'>
       {loading ? (
         <ProductItemsSkeleton />
       ) : (
         <ProductItems products={products} />
       )}
+      </div>
     </div>
   )
 }

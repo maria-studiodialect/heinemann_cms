@@ -52,19 +52,18 @@ function ProductsSimple() {
         <div className="text-2xl font-bold text-black">Products</div>
         <input
           placeholder="Search"
-          className='rounded-full flex-1 mx-40 shadow px-4 py-1.5'
+          className='rounded-full shadow px-4 py-1.5'
           onChange={handleSearch}
         />
-        <div className="flex items-center space-x-2">
-          <AddProduct />
-        </div>
       </header>
       <ProductHeader simple={true} />
+      <div className='h-[55vh] overflow-y-scroll'>
       {loading ? (
         <ProductItemsSkeleton />
       ) : (
         <ProductItems products={products} />
       )}
+      </div>
     </div>
   )
 }

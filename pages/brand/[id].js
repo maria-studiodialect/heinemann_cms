@@ -1,64 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { getXataClient } from '../../utils/xata'
 import Layout from '../../components/layout'
 import ProductLayout from '../../components/Product/ProductLayout'
 import DeleteProduct from '../../components/Product/DeleteProduct'
-import UpdateProduct from '../../components/Product/UpdateProduct'
-import EditableProduct from '../../components/Products/EditableProduct'
+import UpdateBrand from '../../components/Brand/UpdateBrand'
+import Image from 'next/image'
 
 const xata = getXataClient()
 
-function Product({ product }) {
+function Brand({ brand }) {
+  const [measurements, setMeasurements] = useState(null)
   return (
-    <Layout meta={{ name: product?.title || 'Product' }}>
+    <Layout meta={{ name: brand?.title || 'Brand' }}>
       <div>
-        <header className="my-3 flex flex-col items-center justify-end rounded-md md:flex-row">
-          {/*
-          <h1 className="mb-3 truncate text-xl font-bold text-gray-700">
-            <span className="mr-2 text-sm font-medium text-gray-500">
-              Product:{' '}
-            </span>
-            {product?.title}
-          </h1>
-          */}
+        <header className="mx-40 my-3 flex flex-col items-center justify-end rounded-md md:flex-row">
           <div className="flex items-center space-x-2">
-            {/* <UpdateProduct product={product} /> */}
+            <UpdateBrand brand={brand} />
             <DeleteProduct
               disabled={
-                product?.id === 'rec_ce0bsgt8oiq6e92pa810' ||
-                product?.id === 'rec_ce0btqp99gj1h1lgvno0'
+                brand?.id === 'rec_ce0bsgt8oiq6e92pa810' ||
+                brand?.id === 'rec_ce0btqp99gj1h1lgvno0'
               }
-              productId={product?.id}
+              brandId={brand?.id}
             />
           </div>
         </header>
-        {/* 
-        {product ? (
-          <ProductLayout product={product} />
-        ) : (
-          <div className="w-full text-center text-2xl font-bold text-gray-300">
-            No details
-          </div>
-        )}
-        */}
-        <EditableProduct  mainProduct={product}/>
+        <div className="mx-40 flex flex-col justify-center items-center bg-black text-white py-14 rounded-xl mb-20">
+            <div className="relative mb-10 w-[20vw] mx-auto">
+              <Image src={brand.logo} width={537} height={324} onLoadingComplete={e => setMeasurements(e)} className="w-full h-auto object-contain"/>
+            </div>
+            <div className="w-1/2 text-center">{brand.description}</div>
+        </div>
       </div>
     </Layout>
   )
 }
 
-export default Product
+export default Brand
 
 export async function getStaticProps({ params }) {
   try {
-    const data = await xata.db.Products
-      .select(["*", "brand.*"])
+    const data = await xata.db.Brands
       .filter({
         id: params.id,
       })
       .getMany();
     return {
-      props: { product: data[0] },
+      props: { brand: data[0] },
     }
   } catch (error) {
     return {
@@ -68,10 +56,10 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const products = await xata.db.Products.getAll();
+  const brands = await xata.db.Brands.getAll();
 
   return {
-    paths: products.map((item) => ({
+    paths: brands.map((item) => ({
       params: { id: item.id },
     })),
     fallback: true,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../common/Button'
 
-const ThumbnailUpload = ({ defaultValue, setValue }) => {
+const ThumbnailUpload = ({ defaultValue, setValue, info }) => {
   const [imageSrc, setImageSrc] = useState(defaultValue)
   const [loading, setLoading] = useState(false)
   const [uploadData, setUploadData] = useState()
@@ -38,7 +38,7 @@ const ThumbnailUpload = ({ defaultValue, setValue }) => {
       )
       const data = await res.json()
       setImageSrc(data.secure_url)
-      setValue('thumbnail', data.secure_url)
+      setValue('logo', data.secure_url)
       setUploadData(data)
     } catch (error) {
       console.log(error)
@@ -52,15 +52,15 @@ const ThumbnailUpload = ({ defaultValue, setValue }) => {
         name="file"
         type="file"
         onChange={handleOnChange}
-        className="mb-3 w-full rounded-md border p-3 focus:border-sky-300 focus:ring-sky-300"
+        className="mb-1 w-full rounded-md border p-3 focus:border-sky-300 focus:ring-sky-300"
       />
       <div>
-        <img className="mb-2 aspect-video rounded" src={imageSrc} alt="" />
+        <img className="aspect-video rounded bg-gray-100 object-contain" src={imageSrc} alt="" />
         {imageSrc && !uploadData && (
           <Button
             type="submit"
             variant="text"
-            className="w-full"
+            className="w-full my-2"
             loading={loading}
             loadingText="Uploading..."
           >
@@ -68,6 +68,7 @@ const ThumbnailUpload = ({ defaultValue, setValue }) => {
           </Button>
         )}
       </div>
+      {info ? <p className="ml-1 text-xs text-gray-500">Please upload a white version of the logo in PNG format.</p> : null}
     </form>
   )
 }

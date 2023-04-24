@@ -7,7 +7,7 @@ import Sidebar from './Sidebar'
 const Layout = ({ meta, children, ...props }) => {
   const router = useRouter()
   return (
-    <div className="max-w-screen min-h-screen">
+    <div className="max-w-screen">
       <Meta {...meta} />
       <Sidebar />
       <div className="mx-auto flex w-[100%] max-w-screen-xl flex-col">

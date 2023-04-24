@@ -3,7 +3,7 @@ import { RiEditLine } from 'react-icons/ri';
 import Layout from '../components/layout'
 import { useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import {AiFillEdit} from 'react-icons/ai'
+import {GrFormClose} from 'react-icons/gr'
 
 
 export default function Copenhagen(props) {
@@ -58,8 +58,6 @@ export default function Copenhagen(props) {
     setShowAddBrand(true);
   };
 
-
-  console.log(screens)
   return (
       <div className="flex">
       <div className="bg-gray-50">
@@ -78,7 +76,7 @@ export default function Copenhagen(props) {
         {screens &&
         screens.filter(screen => screen.location === 'Copenhagen' && screen.title === activeScreen).map((screen, i) => (
           <div className="bg-white shadow-lg h-fit p-4 rounded-xl my-2 w-[15vw]">
-  <div className="font-bold border-b pb-1 mb-5 flex justify-between"><span>{screen.title}</span><span className="cursor-pointer hover:opacity-70"><AiFillEdit/></span></div>
+  <div className="font-bold border-b pb-1 mb-5 flex justify-between items-center"><span>{screen.title}</span><span className="cursor-pointer hover:opacity-70" onClick={() => setActiveScreen(null)}><GrFormClose/></span></div>
   <div className="mb-2">
       <label htmlFor="brand" className="mb-1 block text-xs font-medium text-gray-600">Screen Type</label>
       <span className="block">{screen.screen_type}</span>
@@ -86,7 +84,20 @@ export default function Copenhagen(props) {
   {screen.brand ? (
     <div className="mb-2">
       <label htmlFor="brand" className="mb-1 block text-xs font-medium text-gray-600">Brand</label>
-      <div className="flex justify-between items-center">{screen.brand.title}</div>
+      <select
+        {...register('brand')} className="border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2"
+      >
+        <option value=''>Select brand</option>
+        {brands.map((brand, index) => (
+          brand.id === screen.brand.id ? 
+          <option key={index} selected value={brand.id} >
+            {brand.title}
+          </option> :
+          <option key={index} value={brand.id} >
+            {brand.title}
+          </option>
+        ))}
+      </select>
     </div>
   ) : (
     screen.screen_type === 'RFID' &&

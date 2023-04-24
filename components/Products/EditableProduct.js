@@ -39,19 +39,7 @@ function EditableProduct({ mainProduct }) {
 
   return (
     <div>
-      <div className='flex justify-between mx-40'>
-      <div className='bg-gray-100 px-10 rounded-t-xl py-2 font-bold'>RFID
-      {isEditing.RFID ? (
-          <input
-            autoFocus
-            defaultValue={product.RFID}
-            className='w-10 text-center px-3 mx-2'
-            onBlur={(e) => handleFieldBlur('RFID', e.target.value)}
-          />
-        ) : (
-          <span onClick={() => handleFieldClick('RFID')} className='w-10 bg-white px-3 mx-2 rounded shadow'>{product.RFID}</span>
-        )}
-      </div>
+      <div className='flex justify-end mx-40 mb-2'>
       <div className='space-x-2'>
         <UpdateProduct  product={mainProduct} />
             <DeleteProduct

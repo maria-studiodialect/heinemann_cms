@@ -5,32 +5,33 @@ import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
 import BrandForm from '../BrandForm'
 
-const AddBrand = ({ props }) => {
+const UpdateBrand = ({ brand, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
+
   const onFormSubmit = async (data) => {
-    console.log(data)
     try {
-      await fetch(`/api/brands/createBrand`, {
-        method: 'POST',
+      await fetch(`/api/brands/updateBrand`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ id: brand.id, ...data }),
       }).then(() => {
         handleClose()
-        window.location.reload()
+        // window.location.reload()
       })
     } catch (error) {
       console.log(error)
     }
   }
 
+
   return (
     <>
       <Button onClick={handleOpen} type="button" {...props}>
-        Add Brand
+        Edit Content
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -62,11 +63,15 @@ const AddBrand = ({ props }) => {
                     as="div"
                     className="mb-5 flex items-center justify-between text-lg font-semibold leading-6 text-gray-800"
                   >
-                    <h3>Add Brand</h3>
+                    <h3>Update Brand</h3>
                     <Close onClick={handleClose} />
                   </Dialog.Title>
 
-                  <BrandForm type={'Add'} onFormSubmit={onFormSubmit} />
+                  <BrandForm
+                    defaultValues={brand}
+                    onFormSubmit={onFormSubmit}
+                    type={'Update'}
+                  />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -77,4 +82,4 @@ const AddBrand = ({ props }) => {
   )
 }
 
-export default AddBrand
+export default UpdateBrand

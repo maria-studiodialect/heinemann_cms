@@ -7,7 +7,6 @@ const DeleteProduct = ({ productId, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
-
   const handleDelete = async () => {
     try {
       await fetch(`/api/products/deleteProduct`, {
@@ -24,7 +23,6 @@ const DeleteProduct = ({ productId, ...props }) => {
       console.log(error)
     }
   }
-
   return (
     <>
       <Button onClick={handleOpen} variant="text" type="button" {...props}>

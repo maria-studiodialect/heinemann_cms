@@ -7,12 +7,12 @@ const makeTitle = (title, name) =>
 const baseUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://jamstackhack-22.netlify.app'
+    : 'https://heinemann.vercel.app'
 
 const Meta = ({
-  title = 'Jamstack Hack',
+  title = 'Heinemann Experience Spaces',
   name = '',
-  description = 'An ecommerce content management system.',
+  description = 'Heinemann CMS',
   url = baseUrl,
   image = '/og.jpg',
   children,

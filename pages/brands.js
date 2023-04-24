@@ -35,7 +35,9 @@ function Brands() {
       </header>
       <div className='grid grid-cols-4 gap-5 mt-6'>
       {brands.map((brand, i) => (
+        <div key={i}>
         <BrandItem title={brand.title} image={brand.logo} id={brand.id}/>
+        </div>
       ))}
       </div>
     </div>

@@ -19,7 +19,7 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body className="min-w-screen relative min-h-screen bg-gray-50 text-gray-800">
+      <body className="min-w-screen relative bg-gray-50 text-gray-800">
         <Main />
         <NextScript />
       </body>

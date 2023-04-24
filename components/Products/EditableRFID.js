@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function EditableRFID({ productId, initialRFID, onRFIDChange }) {
+function EditableRFID({ productId, initialRFID = '0', onRFIDChange }) {
   const [rfid, setRFID] = useState(initialRFID);
   const [isEditing, setIsEditing] = useState(false);
 
