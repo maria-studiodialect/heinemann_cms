@@ -75,7 +75,7 @@ export default function Copenhagen(props) {
       <div>
         {screens &&
         screens.filter(screen => screen.location === 'Copenhagen' && screen.title === activeScreen).map((screen, i) => (
-          <div className="bg-white shadow-lg h-fit p-4 rounded-xl my-2 w-[15vw]">
+          <div className="bg-white shadow-lg h-fit p-4 rounded-xl my-2 w-[15vw]" key={i}>
   <div className="font-bold border-b pb-1 mb-5 flex justify-between items-center"><span>{screen.title}</span><span className="cursor-pointer hover:opacity-70" onClick={() => setActiveScreen(null)}><GrFormClose/></span></div>
   <div className="mb-2">
       <label htmlFor="brand" className="mb-1 block text-xs font-medium text-gray-600">Screen Type</label>
