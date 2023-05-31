@@ -6,7 +6,7 @@ const handler = async (req, res) => {
   // getMany method is used to create records in database
   try {
     const data = await xata.db.Brands.getMany()
-    res.json({ message: 'Success 😁', data })
+    res.json({ data })
   } catch (error) {
     res.status(500).json({ message: error.message, data: [] })
   }
