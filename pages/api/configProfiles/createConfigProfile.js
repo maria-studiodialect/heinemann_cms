@@ -5,7 +5,7 @@ const xata = getXataClient()
 const handler = async (req, res) => {
   // create method is used to create records in database
   try {
-    await xata.db.Config.create({ ...req.body })
+    await xata.db.ConfigProfiles.create({ ...req.body })
     res.json({ message: 'Success 😁' })
   } catch (error) {
     res.status(500).json({ message: error.message })

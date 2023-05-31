@@ -5,7 +5,7 @@ const xata = getXataClient()
 const handler = async (req, res) => {
   // using update method to update records in database
   const { id, ...data } = req.body
-  const record = await xata.db.Config.filter({map_id: id}).getMany();
+  const record = await xata.db.ConfigProfiles.filter({map_id: id}).getMany();
   console.log(record)
   try {
     await record[0].update({ ...data })
