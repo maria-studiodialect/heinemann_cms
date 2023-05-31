@@ -57,7 +57,7 @@ function ProductsSimple() {
         />
       </header>
       <ProductHeader simple={true} />
-      <div className='h-[55vh] overflow-y-scroll'>
+      <div>
       {loading ? (
         <ProductItemsSkeleton />
       ) : (

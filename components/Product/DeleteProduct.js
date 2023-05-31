@@ -7,22 +7,35 @@ const DeleteProduct = ({ productId, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
+  const [deleting, setDeleting] = useState(false);
+
   const handleDelete = async () => {
     try {
-      await fetch(`/api/products/deleteProduct`, {
-        method: 'DELETE',
+      setDeleting(true);
+      const response = await fetch('/api/products/deleteProduct', {
+        method: 'POST',
+        body: JSON.stringify({ id: productId }),
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: productId }),
-      }).then(() => {
-        handleClose()
-        // window.location.replace('/products')
-      })
+      });
+
+      if (response.ok) {
+        // Product deleted successfully, handle any necessary updates
+        console.log('Product deleted');
+      } else {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      }
     } catch (error) {
-      console.log(error)
+      console.error('Error deleting product:', error);
+      // Handle error case, show error message to the user, etc.
+    } finally {
+      setDeleting(false);
+      window.location.replace('/products');
     }
-  }
+  };
+
   return (
     <>
       <Button onClick={handleOpen} variant="text" type="button" {...props}>

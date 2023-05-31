@@ -61,7 +61,7 @@ function Products() {
       </header>
       
       <ProductHeader />
-      <div className='h-[55vh] overflow-y-scroll'>
+      <div>
       {loading ? (
         <ProductItemsSkeleton />
       ) : (

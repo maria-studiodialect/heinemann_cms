@@ -107,7 +107,15 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           </select>
           </div>
           </div>
-          
+          <div className='flex space-x-4 text-sm font-medium text-gray-600'>
+          <div>Images</div>
+          <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+              <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+              <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+          </div>
+          <div>Video</div>
+          </div>
+          <p className="my-2 text-xs text-gray-500">Is the page showing full information and a set of images? Or is it a video-only product?</p> 
           <Input
             name="description"
             label="Description"
@@ -122,12 +130,9 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
             type="text"
             error={errors.attributes ? errors.attributes.message : false}
             info="Separate values with a comma. Ex: 'Sweet & Round, Delicate & Floral'"
-            register={register('attributes', {
-              validate: (value) => value.length > 0 || 'Add at least one attribute',
-            })}
+            register={register('attributes')}
             attributes={{
               ...register('attributes', {
-                validate: (value) => value.length > 0 || 'Add at least one attribute',
                 setValueAs: (value) => {
                   if (typeof value === 'string') {
                     return value.split(',').map((type) => type.trim())
@@ -140,8 +145,6 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
             }}
           />
             {/*<div>  
-          
-         
           <div className='flex items-center justify-between mb-1'>
             <label htmlFor="brand" className="block text-sm font-medium text-gray-600">Attributes</label>
             <button type="button" onClick={addAttribute} className='text-2xl'>
@@ -169,7 +172,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           
         </FormSection>
       </form>
-      <FormSection title={'Product Images'}>
+      <FormSection title={'Product Media'}>
         <MediaUpload defaultValues={defaultValues?.images} setValue={setValue} />
       </FormSection>
 
@@ -177,6 +180,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
         {type ? `${type} Product` : 'Submit'}
       </Button>
     </div>
+
   )
 }
 

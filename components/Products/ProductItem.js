@@ -10,7 +10,7 @@ const ProductItem = ({ id, title, brand, RFID, product_type }) => {
   const router = useRouter();
   return (
     <div className={`my-2 grid ${router.pathname === '/products_simple' ? 'grid-cols-[2fr_1fr_1fr_1fr]' : 'grid-cols-[2fr_1fr_1fr_0.1fr_0.5fr]'} cursor-pointer rounded-md border px-3 py-4 shadow-sm hover:shadow-md lg:px-6`}>
-      <p className="flex-1 truncate font-medium">{title}</p>
+      {router.pathname !== '/products_simple' ? <Link href={`/product/${id}`}><p className="flex-1 truncate font-medium hover:underline">{title}</p></Link> : <p className="flex-1 truncate font-medium">{title}</p>}
       <p className="flex-1 text-right lg:text-left">{brand.title}</p>
       <p className="flex-1 text-right lg:text-left">{product_type}</p>
       {router.pathname === '/products_simple' ?

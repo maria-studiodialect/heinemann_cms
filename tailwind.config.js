@@ -12,6 +12,7 @@ module.exports = {
       screens: {
         laptop: '1024px',
         desktop: '1281px',
+        xxl: '1900px',
       },
       fontFamily: {
         sans: [

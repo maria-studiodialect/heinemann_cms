@@ -4,7 +4,8 @@ import ProductItem from './ProductItem'
 const ProductItems = ({ products }) => {
   console.log(products)
   return (
-    <div className="block max-h-[75vh] overflow-y-auto rounded-lg border p-2 desktop:max-h-[80vh]">
+    <div className="block h-[55vh] overflow-y-scroll rounded-lg border p-2 xxl:max-h-[70vh]">
+      <div className='pb-0.5'>
       {products.length ? (
         products.map((i) => <ProductItem key={i.id} {...i} />)
       ) : (
@@ -12,6 +13,7 @@ const ProductItems = ({ products }) => {
           No products found.
         </div>
       )}
+      </div>
     </div>
   )
 }

@@ -36,7 +36,6 @@ function EditableProduct({ mainProduct }) {
   if (!product) {
     return <div>Loading...</div>;
   }
-
   return (
     <div>
       <div className='flex justify-end mx-40 mb-2'>
@@ -47,15 +46,15 @@ function EditableProduct({ mainProduct }) {
                 mainProduct?.id === 'rec_ce0bsgt8oiq6e92pa810' ||
                 mainProduct?.id === 'rec_ce0btqp99gj1h1lgvno0'
               }
-              productId={mainProduct?.id}
+              productId={mainProduct.id}
             />
       </div>
       </div>
       <div className="mx-40 flex justify-between items-center bg-black text-white py-10 rounded-xl mb-20">
         <div>
-                {product.images.map((item, i) => (
+                {product.images?.map((item, i) => (
                     <div key={i} className="relative w-52 h-32">
-                        <Image src={item} layout="fill" className="object-cover"/>
+                        <Image src={item} fill className="object-cover" alt='product image'/>
                     </div>
                 ))}
         </div>
@@ -79,7 +78,8 @@ function EditableProduct({ mainProduct }) {
             <div className="my-10 mx-10">{product.description}</div>
             <div className="uppercase text-xxs tracking-wide mb-2">Attributes</div>
             <div className="mb-10 flex justify-center">
-                {product.attributes.map((item, i) => (
+              
+                {product.attributes?.map((item, i) => (
                     <div key={i}>
                         {item}
                         <span className="mx-2">{i !== product.attributes.length - 1 && "◦"}</span>
