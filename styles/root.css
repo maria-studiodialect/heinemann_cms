@@ -27,3 +27,15 @@
 body {
     font-family: 'Schibsted Grotesk', sans-serif;
 }
+
+
+/* Toggle A */
+input:checked ~ .dot {
+  transform: translateX(100%);
+}
+
+input:checked ~ .bg {
+  background-color: #48bb78;
+}
+
+/* Toggle B */

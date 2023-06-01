@@ -52,7 +52,7 @@ function EditableProduct({ mainProduct }) {
       </div>
       <div className="mx-40 flex justify-between items-center bg-black text-white py-10 rounded-xl mb-20">
         <div>
-                {product.images?.map((item, i) => (
+                {product.media?.map((item, i) => (
                     <div key={i} className="relative w-52 h-32">
                         <Image src={item} fill className="object-cover" alt='product image'/>
                     </div>

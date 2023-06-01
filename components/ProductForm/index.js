@@ -9,6 +9,7 @@ import MediaUpload from './MediaUpload'
 
 const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   const [brands, setBrands] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   const {
     register,
@@ -22,10 +23,11 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     if (defaultValues) {
       setValue('title', defaultValues.title)
       setValue('description', defaultValues.description)
-      setValue('images', defaultValues.images)
+      setValue('media', defaultValues.media)
       setValue('product_type', defaultValues.product_type)
       setValue('attributes', defaultValues.attributes)
       setValue('brand', defaultValues.brand?.title)
+      setValue('video', defaultValues.video?.title)
     }
   }, [defaultValues, setValue])
 
@@ -33,7 +35,6 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     await onFormSubmit(data)
     reset()
   })
-
 
   useEffect(() => {
     fetchBrands();
@@ -46,12 +47,27 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     setBrands(result.data);
   };
 
-  console.log(brands)
+  function handleCheck() {
+    setIsChecked(!isChecked)
+  }
   
   return (
     <div {...props} className="flex flex-col space-y-6">
       <form>
         <FormSection defaultOpen={true} title={'Product Information'}>
+        <div className="flex items-center justify-center w-full space-x-4">
+          <div>Images</div>
+            <label htmlFor="video" className="flex items-center cursor-pointer">
+              <div className="relative">
+                <input type="checkbox" id="video" checked={isChecked} className="sr-only" {...register('video')} onClick={handleCheck}/>
+                <div className="bg block bg-gray-600 w-10 h-6 rounded-full"></div>
+                <div className="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+              </div>
+            </label>
+            <div>Video</div>
+          </div>
+          <p className="my-2 text-xs text-gray-500 text-center">Is it a normal product or video-only?</p> 
+
         <Input
             name="title"
             label="Product Title"
@@ -107,43 +123,38 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           </select>
           </div>
           </div>
-          <div className='flex space-x-4 text-sm font-medium text-gray-600'>
-          <div>Images</div>
-          <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-              <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-              <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-          </div>
-          <div>Video</div>
-          </div>
-          <p className="my-2 text-xs text-gray-500">Is the page showing full information and a set of images? Or is it a video-only product?</p> 
-          <Input
-            name="description"
-            label="Description"
-            type="textarea"
-            textarea={true}
-            error={errors.description ? errors.description.message : false}
-            register={register('description')}
-          />
-          <Input
-            name="attributes"
-            label="Attributes"
-            type="text"
-            error={errors.attributes ? errors.attributes.message : false}
-            info="Separate values with a comma. Ex: 'Sweet & Round, Delicate & Floral'"
-            register={register('attributes')}
-            attributes={{
-              ...register('attributes', {
-                setValueAs: (value) => {
-                  if (typeof value === 'string') {
-                    return value.split(',').map((type) => type.trim())
-                  }
-                  return []
-                },
-              }),
-              type: 'text',
-              placeholder: 'Type 1, Type 2, Type 3',
-            }}
-          />
+          {!isChecked &&
+            <>
+            <Input
+              name="description"
+              label="Description"
+              type="textarea"
+              textarea={true}
+              error={errors.description ? errors.description.message : false}
+              register={register('description')}
+            />
+            <Input
+              name="attributes"
+              label="Attributes"
+              type="text"
+              error={errors.attributes ? errors.attributes.message : false}
+              info="Separate values with a comma. Ex: 'Sweet & Round, Delicate & Floral'"
+              register={register('attributes')}
+              attributes={{
+                ...register('attributes', {
+                  setValueAs: (value) => {
+                    if (typeof value === 'string') {
+                      return value.split(',').map((type) => type.trim())
+                    }
+                    return []
+                  },
+                }),
+                type: 'text',
+                placeholder: 'Type 1, Type 2, Type 3',
+              }}
+            />
+            </>
+          }
             {/*<div>  
           <div className='flex items-center justify-between mb-1'>
             <label htmlFor="brand" className="block text-sm font-medium text-gray-600">Attributes</label>
@@ -173,7 +184,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
         </FormSection>
       </form>
       <FormSection title={'Product Media'}>
-        <MediaUpload defaultValues={defaultValues?.images} setValue={setValue} />
+        <MediaUpload defaultValues={defaultValues?.media} setValue={setValue} />
       </FormSection>
 
       <Button type="button" onClick={onSubmit} className="w-full">
