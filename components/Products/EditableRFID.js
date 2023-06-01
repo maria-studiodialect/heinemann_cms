@@ -16,7 +16,7 @@ function EditableRFID({ productId, initialRFID = '0', onRFIDChange }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id: productId, RFID: rfid }),
+      body: JSON.stringify({ id: productId, rfid_copenhagen: rfid }),
     });
 
     setIsEditing(false);

@@ -16,7 +16,7 @@ function EditableProduct({ mainProduct }) {
 
   const handleFieldBlur = async (field, value) => {
     // Update the product data locally
-    const fieldValue = field === 'RFID' ? parseInt(value, 10) : value;
+    const fieldValue = field === 'rfid_copenhagen' ? parseInt(value, 10) : value;
 
     setProduct({ ...product, [field]: value });
 
