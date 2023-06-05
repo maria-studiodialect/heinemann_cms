@@ -4,6 +4,8 @@ import Layout from '../components/layout'
 import { useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import {GrFormClose} from 'react-icons/gr'
+import AddSlide from "../components/Carousels/addSlide";
+import CarouselLayout from "../components/Carousels/CarouselLayout";
 
 
 export default function Copenhagen(props) {
@@ -17,7 +19,7 @@ export default function Copenhagen(props) {
   const [loading, setLoading] = useState(false)
   const [screens, setScreens] = useState()
   const [activeScreen, setActiveScreen] = useState(null)
-  const [brands, setBrands] = useState([]);
+  const [slides, setSlides] = useState([]);
   const [brand, setBrand] = useState(null);
   const [showAddBrand, setShowAddBrand] = useState(false);
 
@@ -38,30 +40,19 @@ export default function Copenhagen(props) {
   }, [])
 
   useEffect(() => {
-    fetchBrands();
+    fetchSlides();
   }, []);
 
-  const fetchBrands = async () => {
-    // Replace this URL with the API endpoint to fetch your brands data
-    const response = await fetch('/api/brands/getBrands');
+  const fetchSlides = async () => {
+    // Replace this URL with the API endpoint to fetch your Slides data
+    const response = await fetch('/api/carousels/getSlides');
     const result = await response.json();
-    setBrands(result.data);
+    setSlides(result.data);
   };
-
-  const handleBrandChange = (e) => {
-    const brandId = e.target.value;
-    const brand = brands.find((brand) => brand.id === parseInt(brandId));
-    setBrand(brand);
-  };
-
-  const handleAddBrandClick = () => {
-    setShowAddBrand(true);
-  };
-
   return (
-      <div className="flex">
+      <div className="flex mt-10 pb-5">
       <div className="bg-gray-50">
-        <div className="text-2xl font-bold text-black pl-4">CPH Screens</div>
+        <div className="text-2xl font-bold text-black pl-4">Copenhagen</div>
         <img src="/floor-md.jpg" usemap="#image-map" className="mix-blend-multiply"/>
         <map name="image-map">
         <area target="" alt="Screen 1" title="Screen 1" onClick={() => setActiveScreen('Screen 1')} coords="62,165,139,190" shape="rect" />
@@ -73,67 +64,19 @@ export default function Copenhagen(props) {
         </map>
       </div>
       <div>
-        {screens &&
-        screens.filter(screen => screen.location === 'Copenhagen' && screen.title === activeScreen).map((screen, i) => (
-          <div className="bg-white shadow-lg h-fit p-4 rounded-xl my-2 w-[15vw]" key={i}>
-  <div className="font-bold border-b pb-1 mb-5 flex justify-between items-center"><span>{screen.title}</span><span className="cursor-pointer hover:opacity-70" onClick={() => setActiveScreen(null)}><GrFormClose/></span></div>
-  <div className="mb-2">
-      <label htmlFor="brand" className="mb-1 block text-xs font-medium text-gray-600">Screen Type</label>
-      <span className="block">{screen.screen_type}</span>
-    </div>
-  {screen.brand ? (
-    <div className="mb-2">
-      <label htmlFor="brand" className="mb-1 block text-xs font-medium text-gray-600">Brand</label>
-      <select
-        {...register('brand')} className="border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2"
-      >
-        <option value=''>Select brand</option>
-        {brands.map((brand, index) => (
-          brand.id === screen.brand.id ? 
-          <option key={index} selected value={brand.id} >
-            {brand.title}
-          </option> :
-          <option key={index} value={brand.id} >
-            {brand.title}
-          </option>
-        ))}
-      </select>
-    </div>
-  ) : (
-    screen.screen_type === 'RFID' &&
-    <div className="mb-2">
-      <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Brand</label>
-      <select
-        {...register('brand')}
-        className="border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2"
-        onChange={handleSubmit(async (data) => {
-          try {
-            await fetch(`/api/screens/${screen.id}`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ brandId: data.brand }),
-            });
-            const res = await fetch(`/api/screens/getScreens`);
-            const { data: updatedScreens } = await res.json();
-            setScreens(updatedScreens);
-          } catch (error) {
-            console.error(error);
-          }
-        })}
-      >
-        <option value="">Select brand</option>
-        {brands.map((brand, index) => (
-          <option key={index} value={brand.id}>
-            {brand.title}
-          </option>
-        ))}
-      </select>
-    </div>
-  )}
-</div>
-
-        ))
-      }
+        <div className="flex justify-between w-full">
+        <div className="text-xl pl-4">Carousel Slides</div>
+        <AddSlide/>
+        </div>
+        <div className="bg-gray-50 text-black drop-shadow-lg w-[40vw] mt-4 rounded-xl p-3">
+          <div className="grid grid-cols-3 m-3 gap-3">
+          {slides.map((slide, i) => (
+            <div key={i}>
+            <CarouselLayout mainSlide={slide}/>
+            </div>
+          ))}
+          </div>
+        </div>
       </div>
       </div>
   );

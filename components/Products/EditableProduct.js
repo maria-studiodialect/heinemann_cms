@@ -50,7 +50,8 @@ function EditableProduct({ mainProduct }) {
             />
       </div>
       </div>
-      <div className="mx-40 flex justify-between items-center bg-black text-white py-10 rounded-xl mb-20">
+      <div className={`mx-40 flex ${product.video ? 'justify-center' : 'justify-between'} items-center bg-black text-white py-10 rounded-xl mb-20`}>
+        {product.video === false &&
         <div>
                 {product.media?.map((item, i) => (
                     <div key={i} className="relative w-52 h-32">
@@ -58,10 +59,16 @@ function EditableProduct({ mainProduct }) {
                     </div>
                 ))}
         </div>
+        }
         <div className="max-w-lg text-center"> 
             <div className="relative mb-14 w-[20vw] mx-auto">
                   <Image src={product.brand.logo} width={537} height={324} onLoadingComplete={e => setMeasurements(e)} className="w-full h-auto object-contain"/>
             </div>
+            {product.video &&
+              <video autoPlay muted loop className='mb-5'>
+                <source src={product.media[0]} />
+              </video>
+            }
             <div className="uppercase text-xxs tracking-wide mb-2">{product.product_type}</div>
             <div>
               {isEditing.title ? (
@@ -76,7 +83,7 @@ function EditableProduct({ mainProduct }) {
                 )}
             </div>
             <div className="my-10 mx-10">{product.description}</div>
-            <div className="uppercase text-xxs tracking-wide mb-2">Attributes</div>
+            {product.attributes && <div className="uppercase text-xxs tracking-wide mb-2">Attributes</div>}
             <div className="mb-10 flex justify-center">
               
                 {product.attributes?.map((item, i) => (
@@ -87,7 +94,7 @@ function EditableProduct({ mainProduct }) {
                 ))}
             </div>
         </div>
-        <div className="w-48"></div>
+        {!product.video && <div className="w-48"></div>}
       </div>
     </div>
   );
