@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import { useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import {GrFormClose} from 'react-icons/gr'
-import AddSlide from "../components/Carousels/addSlide";
+import AddSlide from "../components/Carousels/AddSlide";
 import CarouselLayout from "../components/Carousels/CarouselLayout";
 
 
