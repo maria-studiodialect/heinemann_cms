@@ -8,15 +8,14 @@ function CarouselLayout({ mainSlide }) {
     const [isEditing, setIsEditing] = useState({});
     const [measurements, setMeasurements] = useState(null)
 
+    console.log(measurements)
+    console.log(mainSlide)
 
-    console.log('slide:' + mainSlide)
-
-    console.log('hi')
     if (!slide) {
         return <div>Loading...</div>;
     }
     return (
-        <div className="bg-[url('/water-bg.png')] bg-center bg-cover bg-no-repeat w-full h-[35vh]">
+        <div className="bg-[url('/water-bg.png')] bg-center bg-cover bg-no-repeat w-full h-[35vh] text-white">
         {/* 
         <div className='flex justify-end mx-40 mb-2'>
         
@@ -29,9 +28,12 @@ function CarouselLayout({ mainSlide }) {
         
         </div>
         */}
-        <div></div>
+        
+        <div><Image alt='logo' src={slide.title_logo} width={537} height={324} onLoadingComplete={e => setMeasurements(e)}  className="w-full h-auto object-contain"/></div>
+
+        <div>{slide.line_1}</div>
         </div>
     );
 }
 
-export default CarouselLayout;
+export default CarouselLayout;   
