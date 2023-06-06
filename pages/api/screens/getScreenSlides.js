@@ -5,7 +5,7 @@ const xata = getXataClient()
 const handler = async (req, res) => {
   // getMany method is used to create records in database
   const id = req.query.id // Check query parameter and request body
-  const record = await xata.db.Screens.select(["*", "slide_1.*", "slide_2.*", "slide_3.*", "slide_4.*"]).filter({ 'test.id': id }).getMany(); 
+  const record = await xata.db.Screens.select(["*", "slide_1.*", "slide_2.*", "slide_3.*", "slide_4.*"]).filter({ 'config_profile.id': id }).getMany(); 
   try {
     const data = record[0];
     res.json({ data })
