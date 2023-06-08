@@ -1,12 +1,13 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { XataAdapter } from "@next-auth/xata-adapter"
-import { getXataClient } from '../../../utils/xata'
+import { XataClient } from '../../../utils/xata'
+import EmailProvider from "next-auth/providers/email"
 
 
 const client = new XataClient();
 
-export default NextAuth({
+export const authConfig = {
     adapter: XataAdapter(client),
     providers: [
         GoogleProvider({
@@ -14,5 +15,6 @@ export default NextAuth({
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
-});
+};
 
+export default NextAuth(authConfig)

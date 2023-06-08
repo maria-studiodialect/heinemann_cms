@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Layout from '../components/layout'
+import { getServerSession } from 'next-auth'
 
 function Index() {
   return (
-    <div class="flex min-h-[80vh] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+  <div class="flex min-h-[80vh] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
   <div class="w-full max-w-md space-y-8">
     <div>
       <img class="mx-auto h-14 w-auto" src="/eu-logo.svg" alt="Your Company"/>

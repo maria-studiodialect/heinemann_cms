@@ -38,7 +38,7 @@ const Sidebar = () => {
           <div className='flex flex-col items-center'>
           <Link href={'/'}>
             <div className='relative w-36 h-fit mx-auto'>
-              <Image src='/eu-logo.svg' width={316} height={70}/>
+              <Image src='/eu-logo.svg' width={316} height={70} alt='logo' priority />
             </div>
           </Link>
           <div className='h-14 w-14 rounded-full bg-gray-200 mt-7'></div>
