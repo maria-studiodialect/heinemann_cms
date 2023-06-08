@@ -39,3 +39,6 @@ input:checked ~ .bg {
 }
 
 /* Toggle B */
+.callOut {
+  display: none !important;
+}

@@ -1,16 +1,16 @@
+import { AuthContextProvider } from '../stores/authContext'
 import '../styles/root.css'
-import { SessionProvider } from "next-auth/react"
 
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps,
 }) {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
-    <SessionProvider session={session}>
+    <AuthContextProvider>
       {getLayout(<Component {...pageProps} />)}
-    </SessionProvider>
+    </AuthContextProvider>
   )
 }

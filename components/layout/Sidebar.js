@@ -1,11 +1,12 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from '../common/Links'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import {IoBagHandle, IoCart, IoMap, IoLogOut } from 'react-icons/io5'
 import {MdAnalytics} from 'react-icons/md'
+import { AuthContext } from '../../stores/authContext'
 
 
 const Sidebar = () => {
@@ -16,6 +17,8 @@ const Sidebar = () => {
   const linkClass = (href) => {
     return router.pathname === href ? 'font-bold text-black' : 'text-grey-300';
   };
+
+  const {user, login, logout} = useContext(AuthContext)
   return (
     <>
       <div
@@ -56,7 +59,7 @@ const Sidebar = () => {
           <Link href={'/products'} className={`${linkClass('/products')} px-4 py-3 text-gray-400 hover:text-black hover:font-bold mx-2 flex`}><IoCart className='mr-3 text-xl'/> Products</Link>
           {router.pathname !== '/products_simple' && <Link href={'/analytics'} className={`${linkClass('/analytics')} px-4 py-3 text-gray-400 hover:text-black hover:font-bold mx-2 flex`}><MdAnalytics className='mr-3 text-xl'/> Analytics</Link>}
           </div>
-          <div className='flex text-gray-400 hover:text-black hover:font-bold px-4 py-1.5 mx-2'><IoLogOut className='mr-3 text-xl'/> Sign Out</div>
+          <div onClick={logout} className='flex text-gray-400 hover:text-black hover:font-bold px-4 py-1.5 mx-2'><IoLogOut className='mr-3 text-xl'/> Sign Out</div>
         </nav>
       </div>
     </>
