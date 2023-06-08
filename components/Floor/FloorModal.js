@@ -10,7 +10,6 @@ const FloorModal = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
     const [floorTwo, setFloorTwo] = useState(null);
 
 
-    console.log(selectedSlideId);
     const onSelect = async () => {
         try {
             await fetch(`/api/screens/updateScreen`, {
@@ -27,8 +26,6 @@ const FloorModal = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
             console.log(error)
             }
         }
-
-        console.log(slides)
         useEffect(() => {
             const floor_1 = slides.find(slide => slide.type === 'floor_hero')
             const floor_2 = slides.find(slide => slide.type === 'floor_intro')

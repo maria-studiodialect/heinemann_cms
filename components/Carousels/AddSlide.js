@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react'
 
 import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
-import ProductForm from '../ProductForm'
+import CarouselForm from './CarouselForm'
 
 const AddSlide = ({ props }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -66,7 +66,7 @@ const AddSlide = ({ props }) => {
                         <Close onClick={handleClose} />
                     </Dialog.Title>
 
-                    <ProductForm type={'Add'} onFormSubmit={onFormSubmit} />
+                    <CarouselForm type={'Add'} onFormSubmit={onFormSubmit} />
                     </Dialog.Panel>
                 </Transition.Child>
                 </div>

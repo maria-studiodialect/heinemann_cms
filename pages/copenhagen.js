@@ -8,7 +8,7 @@ import AddSlide from "../components/Carousels/AddSlide";
 import CarouselLayout from "../components/Carousels/CarouselLayout";
 import { Dialog, Transition } from '@headlessui/react'
 import { Close } from "../components/common/icons/Close";
-import SetSlide from "../components/Carousels/setSlide";
+import SetSlide from "../components/Carousels/SetSlide";
 import FloorModal from "../components/Floor/FloorModal";
 
 export default function Copenhagen(props) {
@@ -31,10 +31,12 @@ export default function Copenhagen(props) {
 
   const handleClose = () => setIsOpen(false)
   const handleFloorClose = () => setIsFloorOpen(false)
+
   function handleOpen(num) {
     setActiveScreen(num)
     setIsOpen(true)
   }
+
 
   function handleFloorOpen(num) {
     setActiveScreen(num)
@@ -116,7 +118,7 @@ export default function Copenhagen(props) {
           </div>
         </div>
         </div> 
-        <SetSlide isOpen={isOpen} activeId={activeScreen?.id}  activeMapId={activeScreen?.mapId} slides={slides} handleClose={handleClose}/>
+        <SetSlide isOpen={isOpen} activeId={activeScreen?.id}  activeMapId={activeScreen?.map_id} slides={slides} handleClose={handleClose}/>
         <FloorModal isOpen={isFloorOpen} activeId={activeScreen?.id}  activeMapId={activeScreen?.mapId} slides={slides} handleClose={handleFloorClose}/>
     </div>
   );

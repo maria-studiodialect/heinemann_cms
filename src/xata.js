@@ -142,6 +142,7 @@ const DatabaseClient = buildClient();
 const defaultOptions = {
   databaseURL:
     "https://maria-studiodialect-s-workspace-j3k9ii.eu-west-1.xata.sh/db/heinemann",
+    enableBrowser: true,
 };
 /** @typedef { import('./types').DatabaseSchema } DatabaseSchema */
 /** @extends DatabaseClient<DatabaseSchema> */

@@ -1,30 +1,46 @@
 import { Dialog, Transition, FocusTrap } from '@headlessui/react'
-import React, { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import CarouselLayout from './CarouselLayout'
 import { Close } from '../common/icons/Close'
+import { IoIosRadioButtonOff, IoIosCheckmarkCircle } from 'react-icons/io'
 
 const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
     const [selectedSlideId, setSelectedSlideId] = useState(null);
 
-    console.log(selectedSlideId);
-    const onSelect = async () => {
+
+    useEffect(() => {
+        const fetchCurrentSlideId = async () => {
+            try {
+                const response = await fetch(`/api/screens/getScreen?id=${activeId}`);
+                const data = await response.json();
+                setSelectedSlideId(data.data.slide_4.id);
+            } catch (error) {
+                console.log(error);
+            }
+            };
+            fetchCurrentSlideId();
+        }, [activeId]);
+
+    const onSelect = async (slide) => {
+        setSelectedSlideId(slide)
         try {
             await fetch(`/api/screens/updateScreen`, {
                 method: 'PUT',
                 headers: {
                 'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: activeId, ...{slide_4: selectedSlideId} }),
+                body: JSON.stringify({ id: activeId, ...{slide_4: slide} }),
             }).then(() => {
-                handleClose()
-                // window.location.reload()
+                // handleClose()
+                //window.location.reload()
+                console.log('success!')
             })
             } catch (error) {
             console.log(error)
             }
         }
 
-    
+    console.log(activeMapId)
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -63,9 +79,9 @@ const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
                     <div className="mb-1 block text-sm font-medium text-gray-600">Select the relevant brand slide</div>
                     <div className="grid grid-cols-3 p-3 gap-3 border rounded-md">
                     {slides.filter(slide => slide.type === 'brand').map((slide, i) => (
-                        <div key={i} className={`cursor-pointer ${selectedSlideId === slide.id && 'bg-white'}`} onClick={() => setSelectedSlideId(slide.id)}>
+                        <div key={i} className={`cursor-pointer px-2 pt-2 ${selectedSlideId === slide.id && 'bg-white shadow rounded-lg'}`} onClick={() => onSelect(slide.id)}>
                         <CarouselLayout mainSlide={slide}/>
-                        <div className="text-center my-1 text-xs">{slide.brand}</div>
+                        <div className="text-center my-1 text-xs flex items-center">{selectedSlideId === slide.id ? <IoIosCheckmarkCircle/> : <IoIosRadioButtonOff/>}<div className='flex-1'>{slide.brand}</div></div>
                         </div>
                     ))}
                     </div>
