@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RiEditLine } from 'react-icons/ri';
 import Layout from '../components/layout'
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, useContext } from "react";
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import {GrFormClose} from 'react-icons/gr'
 import AddSlide from "../components/Carousels/AddSlide";
@@ -10,6 +10,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Close } from "../components/common/icons/Close";
 import SetSlide from "../components/Carousels/SetSlide";
 import FloorModal from "../components/Floor/FloorModal";
+import { AuthContext } from "../stores/authContext";
 
 export default function Copenhagen(props) {
   const {
@@ -27,6 +28,12 @@ export default function Copenhagen(props) {
   const [showAddBrand, setShowAddBrand] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   let [isFloorOpen, setIsFloorOpen] = useState(false)
+  const {user} = useContext(AuthContext)
+  const [role, setRole] = useState(null)
+
+  useEffect(() => {
+    setRole(user?.app_metadata.roles[0])
+  }, [user])
 
 
   const handleClose = () => setIsOpen(false)
@@ -78,10 +85,10 @@ export default function Copenhagen(props) {
 
   return (
     <div>
-        <div className="flex mt-10 pb-5">
+        <div className="flex justify-between mt-10 pb-5">
         <div className="bg-gray-50">
           <div className="text-2xl font-bold text-black pl-4">Copenhagen</div>
-          <svg width="572" height="594" viewBox="0 0 572 594" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="572" height="594" viewBox="0 0 572 594" fill="none" xmlns="http://www.w3.org/2000/svg" className="max-w-[35vw] max-h-[72vh]">
           <path d="M27.5 572V28.5H224.5L544 572H27.5Z" stroke="#9CA3AF" stroke-width="10"/>
           <rect onClick={() => handleOpen(screens[0])} x="45" y="124" width="11" height="70" fill="#9CA3AF" className="cursor-pointer"/>
           <rect onClick={() => handleOpen(screens[1])} x="126" y="153" width="11" height="70" transform="rotate(90 126 153)" fill="#9CA3AF" className="cursor-pointer"/>
@@ -103,11 +110,11 @@ export default function Copenhagen(props) {
           </svg>
         </div>
         <div>
-          <div className="flex justify-between w-full">
+          <div className="flex justify-between items-center w-full">
           <div className="text-xl pl-4">Carousel Slides</div>
-          <AddSlide/>
+          {role === 'admin' && <AddSlide/>}
           </div>
-          <div className="bg-gray-50 text-black drop-shadow-lg w-[40vw] mt-4 rounded-xl p-3">
+          <div className="bg-gray-50 text-black drop-shadow-lg w-[37vw] mt-4 rounded-xl p-3">
             <div className="grid grid-cols-3 m-3 gap-3">
             {slides.filter(slide => !slide.type.includes('floor')).map((slide, i) => (
               <div key={i}>

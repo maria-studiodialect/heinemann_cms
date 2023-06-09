@@ -42,3 +42,25 @@ input:checked ~ .bg {
 .callOut {
   display: none !important;
 }
+
+.uploadcare--widget__button_type_open {
+  background-color: black;
+}
+
+.uploadcare--widget__button_type_open:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.uploadcare--button_primary {
+  background-color: black;
+}
+
+.uploadcare--button_primary:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.uploadcare--button_primary:active, .uploadcare--button_primary:focus {
+  background-color: black;
+  color: white;
+}
+

@@ -1,23 +1,33 @@
 import { useState } from 'react';
 
-function EditableRFID({ productId, initialRFID = '0', onRFIDChange }) {
+function EditableRFID({ productId, initialRFID = '0', location, onRFIDChange }) {
   const [rfid, setRFID] = useState(initialRFID);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleFieldClick = () => {
     setIsEditing(true);
   };
+  
 
   const handleFieldBlur = async () => {
     // Save changes to Xata
     // Replace this URL with the API endpoint to update your product data
+    const fieldName = 'rfid_' + location;
+    const requestBody = {
+      id: productId,
+      [fieldName]: rfid,
+    };
+
+    console.log(fieldName)
+  
     await fetch(`/api/products/updateProduct`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id: productId, rfid_copenhagen: rfid }),
+      body: JSON.stringify(requestBody),
     });
+
 
     setIsEditing(false);
   };

@@ -36,10 +36,10 @@ function Locations() {
           <Link href="/copenhagen">COPENHAGEN</Link>
         </div>
         <div className="bg-[url('/ist.jpg')] bg-center bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
-          <Link href="/istanbul">ISTANBUL</Link>
+          <Link href="">ISTANBUL</Link>
         </div>
         <div className="bg-[url('/FRA.webp')] bg-bottom  bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
-          <Link href="/frankfurt">FRANKFURT</Link> 
+          <Link href="">FRANKFURT</Link> 
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ const UpdateProduct = ({ product, ...props }) => {
   const handleOpen = () => setIsOpen(true)
 
   const onFormSubmit = async (data) => {
+    console.log(data)
     try {
       await fetch(`/api/products/updateProduct`, {
         method: 'PUT',

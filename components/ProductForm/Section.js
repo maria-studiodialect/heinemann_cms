@@ -1,10 +1,10 @@
-import { Disclosure } from '@headlessui/react'
-import clsx from 'clsx'
-import ChevronRight from '../common/icons/ChevronRight'
+import { Disclosure } from '@headlessui/react';
+import clsx from 'clsx';
+import ChevronRight from '../common/icons/ChevronRight';
 
 export default function FormSection({ title, children, ...props }) {
   return (
-    <Disclosure as="div" {...props}>
+    <Disclosure {...props}>
       {({ open }) => (
         <>
           <Disclosure.Button
@@ -22,11 +22,18 @@ export default function FormSection({ title, children, ...props }) {
               )}
             />
           </Disclosure.Button>
-          <Disclosure.Panel as="div" className="rounded p-3 shadow-sm">
-            {children}
+          <Disclosure.Panel
+            as="div"
+            static
+            className={clsx(
+              'rounded p-3 shadow-sm',
+              open ? 'block' : 'hidden'
+            )}
+          >
+            {open && children}
           </Disclosure.Panel>
         </>
       )}
     </Disclosure>
-  )
+  );
 }

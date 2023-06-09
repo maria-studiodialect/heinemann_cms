@@ -25,7 +25,6 @@ const BrandForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     await onFormSubmit(data)
-    reset()
   })
   return (
     <div {...props} className="flex flex-col space-y-6">

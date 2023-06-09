@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { NavLink } from '../common/Links'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -14,9 +14,12 @@ const Sidebar = () => {
   const handleToggle = () => setIsOpen((prev) => !prev)
   const router = useRouter();
   const {user, login, logout, authReady} = useContext(AuthContext)
+  const [role, setRole] = useState(null)
 
-  console.log(user?.role)
-  console.log(user)
+  useEffect(() => {
+    setRole(user?.app_metadata.roles[0])
+  }, [user])
+  
 
   const linkClass = (href) => {
     return router.pathname === href ? 'font-bold text-black' : 'text-gray-400';
@@ -55,22 +58,19 @@ const Sidebar = () => {
           {user && (
             <>
             <div className='h-14 w-14 rounded-full bg-gray-200 mt-7'></div>
-            <div className='text-sm font-bold mt-2'>Ulla Thomas</div>
-            <div className='text-sm text-gray-400'>Admin</div>
+            <div className='text-sm font-bold mt-2'>{user?.user_metadata.full_name}</div>
+            <div className='text-sm text-gray-400'>{user?.app_metadata.roles[0]}</div>
             </>
           )
           }
           </div>
           <div>
-          {router.pathname !== '/products_simple' && (
-            <>
-          <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> Locations</Link>
+          {role === 'admin' &&           <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> Locations</Link>}  
+          {role === 'copenhagen' &&           <Link href={'/copenhagen'} className={`${linkClass('/copenhagen')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> CPH</Link>}  
+
           <Link href={'/brands'} className={`${linkClass('/brands')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoBagHandle className='mr-3 text-xl'/> Brands</Link>
-          </>
-          )
-          }
           <Link href={'/products'} className={`${linkClass('/products')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoCart className='mr-3 text-xl'/> Products</Link>
-          {router.pathname !== '/products_simple' && <div className={`${linkClass('/analytics')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><MdAnalytics className='mr-3 text-xl'/> Analytics</div>}
+          <div className={`${linkClass('/analytics')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><MdAnalytics className='mr-3 text-xl'/> Analytics</div>
           </div>
           <div onClick={handleLogout} className='flex text-gray-400 hover:text-black hover:font-bold px-4 py-1.5 mx-2 cursor-pointer'><IoLogOut className='mr-3 text-xl'/> Sign Out</div>
         </nav>

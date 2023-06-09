@@ -1,16 +1,25 @@
 import Layout from '../components/layout'
 import ProductItems from '../components/Products/ProductItems'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ProductItemsSkeleton from '../components/Products/ProductItemsSkeleton'
 import ProductHeader from '../components/Products/ProductHeader'
 import AddProduct from '../components/Product/AddProduct'
 import axios from "axios";
+import useAuthentication from '../hooks/useAuthentication'
+import { AuthContext } from '../stores/authContext'
 
 
 function Products() {
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState([])
   const [fullProducts, setFullProducts] = useState([])
+  const {user} = useContext(AuthContext)
+  const [role, setRole] = useState(null)
+
+  useEffect(() => {
+    setRole(user?.app_metadata.roles[0])
+  }, [user])
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
@@ -45,7 +54,6 @@ function Products() {
     }
   };
   
-
   return (
     <div>
       <header className="mt-3 flex items-center justify-between">
@@ -55,9 +63,11 @@ function Products() {
           className='rounded-full flex-1 mx-40 shadow px-4 py-1.5'
           onChange={handleSearch}
         />
+        {role === 'admin' &&
         <div className="flex items-center space-x-2">
           <AddProduct />
         </div>
+        }
       </header>
       
       <ProductHeader />

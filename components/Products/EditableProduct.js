@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import UpdateProduct from '../Product/UpdateProduct';
 import DeleteProduct from '../Product/DeleteProduct';
+import { AuthContext } from '../../stores/authContext';
 
 function EditableProduct({ mainProduct }) {
   const [product, setProduct] = useState(mainProduct);
   const [isEditing, setIsEditing] = useState({});
   const [measurements, setMeasurements] = useState(null)
+  const {user} = useContext(AuthContext)
+  const [role, setRole] = useState(null)
+
+  useEffect(() => {
+    setRole(user?.app_metadata.roles[0])
+  }, [user])
 
   console.log(measurements)
 
@@ -39,6 +46,7 @@ function EditableProduct({ mainProduct }) {
   return (
     <div>
       <div className='flex justify-end mx-40 mb-2'>
+      {role === 'admin' &&
       <div className='space-x-2'>
         <UpdateProduct  product={mainProduct} />
             <DeleteProduct
@@ -49,8 +57,9 @@ function EditableProduct({ mainProduct }) {
               productId={mainProduct.id}
             />
       </div>
+      }  
       </div>
-      <div className={`mx-40 flex ${product.video ? 'justify-center' : 'justify-between'} items-center bg-black text-white py-10 rounded-xl mb-20`}>
+      <div className={`mx-40 flex ${product.video ? 'justify-center' : 'justify-between'} items-center bg-black text-white py-10 rounded-xl mb-5`}>
         {product.video === false &&
         <div>
                 {product.media?.map((item, i) => (
@@ -61,8 +70,8 @@ function EditableProduct({ mainProduct }) {
         </div>
         }
         <div className="max-w-lg text-center"> 
-            <div className="relative mb-14 w-[20vw] mx-auto">
-                  <Image src={product.brand.logo} width={537} height={324} onLoadingComplete={e => setMeasurements(e)} className="w-full h-auto object-contain"/>
+            <div className="relative mb-8 w-[20vw] mx-auto">
+                  <Image src={product.brand.logo} width={537} height={324} onLoadingComplete={e => setMeasurements(e)} className="w-full h-auto object-contain max-h-[20vh]"/>
             </div>
             {product.video &&
               <video autoPlay muted loop className='mb-5'>

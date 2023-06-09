@@ -3,13 +3,13 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import Button from '../common/Button'
 import Input from '../common/Input'
 import FormSection from '../ProductForm/Section';
-import {IoIosAddCircle} from 'react-icons/io'
-import {AiFillDelete} from 'react-icons/ai'
 import MediaUpload from '../ProductForm/MediaUpload';
+import MediaUploadCare from '../ProductForm/MediaUploadcare';
 
 const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   const [brands, setBrands] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
+  const [slideType, setSlideType] = useState(null)
 
   const {
     register,
@@ -21,8 +21,8 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
 
   useEffect(() => {
     if (defaultValues) {
-      setValue('title', defaultValues.title)
-      setValue('description', defaultValues.description)
+      setValue('type', defaultValues.t)
+      setValue('title_logo', defaultValues.title_logo)
       setValue('media', defaultValues.media)
       setValue('product_type', defaultValues.product_type)
       setValue('attributes', defaultValues.attributes)
@@ -50,24 +50,34 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   function handleCheck() {
     setIsChecked(!isChecked)
   }
+
+  console.log(slideType)
+
   
   return (
     <div {...props} className="flex flex-col space-y-6">
       <form>
-        <FormSection defaultOpen={true} title={'Product Information'}>
-        <div className="flex items-center justify-center w-full space-x-4">
-          <div>Images</div>
-            <label htmlFor="video" className="flex items-center cursor-pointer">
-              <div className="relative">
-                <input type="checkbox" id="video" checked={isChecked} className="sr-only" {...register('video')} onClick={handleCheck}/>
-                <div className="bg block bg-gray-600 w-10 h-6 rounded-full"></div>
-                <div className="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
-              </div>
-            </label>
-            <div>Video</div>
-          </div>
-          <p className="my-2 text-xs text-gray-500 text-center">Is it a normal product or video-only?</p> 
-
+        <div className='mb-2'>
+          <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Slide Type</label>
+          <select
+            {...register('type')}
+            name='type'
+            className='border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2'
+            onChange={(e) => {
+              setSlideType(e.target.value);
+            }}
+          >
+            <option disabled value="">Select</option>
+            <option value='hero'>Hero Screen</option>
+            <option value='intro'>Intro Screen</option>
+            <option value='city'>City Partnership Screen</option>
+            <option value='brand'>Brand Screen</option>
+          </select>
+        </div>
+        <div className='mb-4'>
+        <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Main Logo</label>
+        <MediaUploadCare defaultValues={defaultValues?.media} setValue={setValue} />
+        </div>
         <Input
             name="title"
             label="Product Title"
@@ -111,17 +121,7 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
               placeholder: 'Type 1, Type 2, Type 3',
             }}
           />
-          <div className='mb-2'>
-          <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Brand</label>
-          <select {...register('brand')} name='brand' defaultValue={defaultValues?.brand?.title} className='border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2'>
-            <option disabled value="">Select brand</option>
-            {brands.map((brand, index) => (
-              <option key={index} value={brand.id}>
-                {brand.title}
-              </option>
-            ))}
-          </select>
-          </div>
+          
           </div>
           {!isChecked &&
             <>
@@ -155,38 +155,7 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
             />
             </>
           }
-            {/*<div>  
-          <div className='flex items-center justify-between mb-1'>
-            <label htmlFor="brand" className="block text-sm font-medium text-gray-600">Attributes</label>
-            <button type="button" onClick={addAttribute} className='text-2xl'>
-              <IoIosAddCircle/>
-            </button>
-          </div>
-          {attributes.length > 0 ?
-          attributes.map((attribute, index) => (
-            <div key={index} className='flex'>
-              <input
-                {...register(`attributes.${index}`)}
-                defaultValue={attribute}
-                className='border px-4 py-2 rounded-md mr-2 flex-1 mb-2 border-gray-300'
-              />
-              <button type="button" onClick={() => removeAttribute(index)} className='mr-0.5 text-xl'>
-                <AiFillDelete/>
-              </button>
-            </div>
-          ))
-          :
-          <div className='bg-gray-100 text-center py-2 rounded-md mb-2'>There are no items.</div>
-          }
-          </div>
-          */}
-          
-        </FormSection>
       </form>
-      <FormSection title={'Product Media'}>
-        <MediaUpload defaultValues={defaultValues?.media} setValue={setValue} />
-      </FormSection>
-
       <Button type="button" onClick={onSubmit} className="w-full">
         {type ? `${type} Product` : 'Submit'}
       </Button>

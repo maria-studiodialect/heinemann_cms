@@ -12,7 +12,7 @@ const AddSlide = ({ props }) => {
     const onFormSubmit = async (data) => {
         console.log(data)
         try {
-        await fetch(`/api/products/createProduct`, {
+        await fetch(`/api/carousels/createSlide`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
