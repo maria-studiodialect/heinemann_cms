@@ -51,6 +51,9 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     await onFormSubmit(data);
   });
 
+
+  console.log(defaultValues)
+
   return (
     <div {...props} className="flex flex-col space-y-4">
       <div>
@@ -87,20 +90,34 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           })}
         />
         <div className="grid grid-cols-2 gap-5">
-          <Input
+        <Input
             name="product_type"
             label="Product Type"
-            type="text"
+            type="textarea"
             error={errors.product_type ? errors.product_type.message : false}
             register={register('product_type', {
               required: {
                 value: true,
-                message: 'Please enter a product type',
+                message: 'Add at least one product type',
               },
+              validate: (value) => value.length > 0 || 'Add at least one product type',
             })}
             attributes={{
+              ...register('product_type', {
+                required: {
+                  value: true,
+                  message: 'Add at least one product type',
+                },
+                validate: (value) => value.length > 0 || 'Add at least one product type',
+                setValueAs: (value) => {
+                  if (typeof value === 'string') {
+                    return value.split(',').map((type) => type.trim())
+                  }
+                  return []
+                },
+              }),
               type: 'text',
-              placeholder: 'Enter a product type',
+              placeholder: 'Type 1, Type 2, Type 3',
             }}
           />
           <div className="mb-2">
@@ -161,7 +178,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">
               Product Media
           </label>
-          <div className='border border-gray-200 rounded-md px-4'>
+          <div className='border border-gray-200 rounded-md px-4 py-2'>
         <MediaUploadCare defaultValues={defaultValues?.media} setValue={setValue} />
         </div>
         {/* <MediaUpload defaultValues={defaultValues?.media} setValue={setValue} /> */}
