@@ -2,10 +2,17 @@ import Link from 'next/link'
 import Layout from '../components/layout'
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../stores/authContext';
+import { useRouter } from 'next/router';
 
 export default function Index() {
   const {user, login} = useContext(AuthContext)
-  console.log(user)
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/products"); // Redirect to the welcome page if user is logged in
+    }
+  }, [user, router]);
   return (
   <div class="flex min-h-[80vh] items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
     <div class="w-full max-w-md space-y-8">

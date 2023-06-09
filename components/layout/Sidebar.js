@@ -13,12 +13,17 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const handleToggle = () => setIsOpen((prev) => !prev)
   const router = useRouter();
+  const {user, login, logout, authReady} = useContext(AuthContext)
 
   const linkClass = (href) => {
-    return router.pathname === href ? 'font-bold text-black' : 'text-grey-300';
+    return router.pathname === href ? 'font-bold text-black' : 'text-gray-400';
   };
 
-  const {user, login, logout} = useContext(AuthContext)
+  const handleLogout = () => {
+    logout()
+    router.push('/') // Redirect to the home page after sign out
+  }
+
   return (
     <>
       <div
@@ -44,22 +49,27 @@ const Sidebar = () => {
               <Image src='/eu-logo.svg' width={316} height={70} alt='logo' priority />
             </div>
           </Link>
-          <div className='h-14 w-14 rounded-full bg-gray-200 mt-7'></div>
-          <div className='text-sm font-bold mt-2'>Ulla Thomas</div>
-          <div className='text-sm text-gray-400'>Admin</div>
+          {user && (
+            <>
+            <div className='h-14 w-14 rounded-full bg-gray-200 mt-7'></div>
+            <div className='text-sm font-bold mt-2'>Ulla Thomas</div>
+            <div className='text-sm text-gray-400'>Admin</div>
+            </>
+          )
+          }
           </div>
           <div>
           {router.pathname !== '/products_simple' && (
             <>
-          <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-3 text-gray-400 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> Locations</Link>
-          <Link href={'/brands'} className={`${linkClass('/brands')} px-4 py-3 text-gray-400 hover:text-black hover:font-bold mx-2 flex`}><IoBagHandle className='mr-3 text-xl'/> Brands</Link>
+          <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> Locations</Link>
+          <Link href={'/brands'} className={`${linkClass('/brands')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoBagHandle className='mr-3 text-xl'/> Brands</Link>
           </>
           )
           }
-          <Link href={'/products'} className={`${linkClass('/products')} px-4 py-3 text-gray-400 hover:text-black hover:font-bold mx-2 flex`}><IoCart className='mr-3 text-xl'/> Products</Link>
-          {router.pathname !== '/products_simple' && <Link href={'/analytics'} className={`${linkClass('/analytics')} px-4 py-3 text-gray-400 hover:text-black hover:font-bold mx-2 flex`}><MdAnalytics className='mr-3 text-xl'/> Analytics</Link>}
+          <Link href={'/products'} className={`${linkClass('/products')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoCart className='mr-3 text-xl'/> Products</Link>
+          {router.pathname !== '/products_simple' && <div className={`${linkClass('/analytics')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><MdAnalytics className='mr-3 text-xl'/> Analytics</div>}
           </div>
-          <div onClick={logout} className='flex text-gray-400 hover:text-black hover:font-bold px-4 py-1.5 mx-2'><IoLogOut className='mr-3 text-xl'/> Sign Out</div>
+          <div onClick={handleLogout} className='flex text-gray-400 hover:text-black hover:font-bold px-4 py-1.5 mx-2 cursor-pointer'><IoLogOut className='mr-3 text-xl'/> Sign Out</div>
         </nav>
       </div>
     </>
