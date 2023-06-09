@@ -15,6 +15,9 @@ const Sidebar = () => {
   const router = useRouter();
   const {user, login, logout, authReady} = useContext(AuthContext)
 
+  console.log(user?.role)
+  console.log(user)
+
   const linkClass = (href) => {
     return router.pathname === href ? 'font-bold text-black' : 'text-gray-400';
   };
