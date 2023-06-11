@@ -26,7 +26,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
       setValue('media', defaultValues.media);
       setValue('product_type', defaultValues.product_type);
       setValue('attributes', defaultValues.attributes);
-      setValue('brand', defaultValues.brand?.title);
+      setValue('brand', defaultValues.brand);
       setValue('video', defaultValues.video);
       setIsChecked(defaultValues.video);
     }
@@ -91,35 +91,17 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
         />
         <div className="grid grid-cols-2 gap-5">
         <Input
-            name="product_type"
-            label="Product Type"
-            type="textarea"
-            error={errors.product_type ? errors.product_type.message : false}
-            register={register('product_type', {
-              required: {
-                value: true,
-                message: 'Add at least one product type',
-              },
-              validate: (value) => value.length > 0 || 'Add at least one product type',
-            })}
-            attributes={{
-              ...register('product_type', {
-                required: {
-                  value: true,
-                  message: 'Add at least one product type',
-                },
-                validate: (value) => value.length > 0 || 'Add at least one product type',
-                setValueAs: (value) => {
-                  if (typeof value === 'string') {
-                    return value.split(',').map((type) => type.trim())
-                  }
-                  return []
-                },
-              }),
-              type: 'text',
-              placeholder: 'Type 1, Type 2, Type 3',
-            }}
-          />
+          name="product_type"
+          label="Product Type"
+          type="text"
+          error={errors.product_type ? errors.product_type.message : false}
+          register={register('product_type', {
+            required: {
+              value: true,
+              message: 'Add a product type',
+            },
+          })}
+        />
           <div className="mb-2">
             <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">
               Brand
