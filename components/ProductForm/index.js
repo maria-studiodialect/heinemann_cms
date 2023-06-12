@@ -25,7 +25,10 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
       setValue('description', defaultValues.description);
       setValue('media', defaultValues.media);
       setValue('product_type', defaultValues.product_type);
-      setValue('attributes', defaultValues.attributes);
+      if (defaultValues.attributes) {
+        const attributesString = defaultValues.attributes.join(', ');
+        setValue('attributes', attributesString);
+      }
       setValue('brand', defaultValues.brand);
       setValue('video', defaultValues.video);
       setIsChecked(defaultValues.video);
@@ -48,7 +51,13 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   }
 
   const onSubmit = handleSubmit(async (data) => {
-    await onFormSubmit(data);
+    const attributesArray = data.attributes.split(',').map((value) => value.trim());
+
+    // Update the data object with the converted attributes array
+    const updatedData = { ...data, attributes: attributesArray };
+
+    // Call the onFormSubmit function with the updated data
+    await onFormSubmit(updatedData);
   });
 
 
@@ -139,19 +148,10 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
             type="text"
             error={errors.attributes ? errors.attributes.message : false}
             info="Separate values with a comma. Ex: 'Sweet & Round, Delicate & Floral'"
-            register={register('attributes', {
-              setValueAs: (value) => {
-                if (typeof value === 'string') {
-                  return value.split(',').map((type) => type.trim());
-                }
-                return [];
-              },
-            })}
-            attributes={{
-              type: 'text',
-              placeholder: 'Type 1, Type 2, Type 3',
-            }}
+            register={register('attributes')}
           />
+
+          
 
 
           </>

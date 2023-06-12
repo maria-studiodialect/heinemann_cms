@@ -21,7 +21,7 @@ const UpdateProduct = ({ product, ...props }) => {
         body: JSON.stringify({ id: product.id, ...data }),
       }).then(() => {
         handleClose()
-        // window.location.reload()
+        window.location.reload()
       })
     } catch (error) {
       console.log(error)
