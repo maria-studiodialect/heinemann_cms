@@ -22,7 +22,7 @@ export default Product
 
 export async function getServerSideProps({ params }) {
   try {
-    const res = await fetch(`http://localhost:3000/api/products/getProduct?id=${params.id}`);
+    const res = await fetch(`https://heinemann.netlify.app//api/products/getProduct?id=${params.id}`);
     const data = await res.json();
     
     return {
@@ -37,7 +37,7 @@ export async function getServerSideProps({ params }) {
 
 export async function getServerSidePaths() {
   try {
-    const res = await fetch('http://localhost:3000/api/products/getProducts');
+    const res = await fetch('https://heinemann.netlify.app/api/products/getProducts');
     const products = await res.json();
   
     return {
