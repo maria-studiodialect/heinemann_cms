@@ -61,7 +61,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   });
 
 
-  console.log(defaultValues)
+  // console.log(defaultValues)
 
   return (
     <div {...props} className="flex flex-col space-y-4">
