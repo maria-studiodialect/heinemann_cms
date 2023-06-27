@@ -24,7 +24,8 @@ const UpdateProduct = ({ product, ...props }) => {
         // window.location.reload()
       })
     } catch (error) {
-      console.log(error)
+      console.error('Error updating the product:', error);
+      // Additional error handling logic
     }
   }
 
