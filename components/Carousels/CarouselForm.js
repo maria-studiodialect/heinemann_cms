@@ -17,17 +17,21 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     formState: { errors },
     reset,
     setValue,
+    watch
   } = useForm()
 
   useEffect(() => {
     if (defaultValues) {
-      setValue('type', defaultValues.t)
+      setValue('type', defaultValues.type)
       setValue('title_logo', defaultValues.title_logo)
-      setValue('media', defaultValues.media)
-      setValue('product_type', defaultValues.product_type)
-      setValue('attributes', defaultValues.attributes)
-      setValue('brand', defaultValues.brand?.title)
-      setValue('video', defaultValues.video?.title)
+      setValue('partner_logos', defaultValues.partner_logos)
+      setValue('line_1', defaultValues.line_1)
+      setValue('line_2', defaultValues.line_2)
+      setValue('line_3', defaultValues.line_3)
+      setValue('line_4', defaultValues.line_4)
+      setValue('line_5', defaultValues.line_5)
+      setValue('line_6', defaultValues.line_6)
+      setValue('brand', defaultValues.brand)
     }
   }, [defaultValues, setValue])
 
@@ -51,8 +55,7 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     setIsChecked(!isChecked)
   }
 
-  console.log(slideType)
-
+  const type = watch('type'); 
   
   return (
     <div {...props} className="flex flex-col space-y-6">
@@ -61,11 +64,8 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Slide Type</label>
           <select
             {...register('type')}
-            name='type'
+            defaultValue={defaultValues.type}
             className='border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2'
-            onChange={(e) => {
-              setSlideType(e.target.value);
-            }}
           >
             <option disabled value="">Select</option>
             <option value='hero'>Hero Screen</option>
@@ -91,36 +91,6 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
             })}
           />
           <div className='grid grid-cols-2 gap-5'>
-          <Input
-            name="product_type"
-            label="Product Type"
-            type="textarea"
-            error={errors.product_type ? errors.product_type.message : false}
-            register={register('product_type', {
-              required: {
-                value: true,
-                message: 'Add at least one product type',
-              },
-              validate: (value) => value.length > 0 || 'Add at least one product type',
-            })}
-            attributes={{
-              ...register('product_type', {
-                required: {
-                  value: true,
-                  message: 'Add at least one product type',
-                },
-                validate: (value) => value.length > 0 || 'Add at least one product type',
-                setValueAs: (value) => {
-                  if (typeof value === 'string') {
-                    return value.split(',').map((type) => type.trim())
-                  }
-                  return []
-                },
-              }),
-              type: 'text',
-              placeholder: 'Type 1, Type 2, Type 3',
-            }}
-          />
           
           </div>
           {!isChecked &&
