@@ -30,7 +30,7 @@ export async function getStaticProps({ params }) {
     
     return {
       props: { product: data[0] },
-      revalidate: 60, // Revalidate the page every 60 seconds (adjust as needed)
+      revalidate: 10, // Revalidate the page every 60 seconds (adjust as needed)
     };
   } catch (error) {
     return {
