@@ -1,12 +1,9 @@
 import React from 'react'
-import { getXataClient } from '../../utils/xata'
 import Layout from '../../components/layout'
 import ProductLayout from '../../components/Product/ProductLayout'
 import DeleteProduct from '../../components/Product/DeleteProduct'
 import UpdateProduct from '../../components/Product/UpdateProduct'
 import EditableProduct from '../../components/Products/EditableProduct'
-
-const xata = getXataClient()
 
 function Product({ product }) {
   return (
@@ -22,15 +19,14 @@ function Product({ product }) {
 
 export default Product
 
-export async function getStaticProps({ params }) {
+
+export async function getServerSideProps({ params }) {
   try {
-    const data = await xata.db.Products.select(['*', 'brand.*']).filter({
-      id: params.id,
-    }).getMany();
+    const res = await fetch(`http://localhost:3000/api/products/getProduct?id=${params.id}`);
+    const data = await res.json();
     
     return {
-      props: { product: data[0] },
-      revalidate: 10, // Revalidate the page every 60 seconds (adjust as needed)
+      props: { product: data.data },
     };
   } catch (error) {
     return {
@@ -39,13 +35,21 @@ export async function getStaticProps({ params }) {
   }
 }
 
-export async function getStaticPaths() {
-  const products = await xata.db.Products.getAll();
-
-  return {
-    paths: products.map((item) => ({
-      params: { id: item.id },
-    })),
-    fallback: true,
+export async function getServerSidePaths() {
+  try {
+    const res = await fetch('http://localhost:3000/api/products/getProducts');
+    const products = await res.json();
+  
+    return {
+      paths: products.map((item) => ({
+        params: { id: item.id },
+      })),
+      fallback: true,
+    };
+  } catch (error) {
+    return {
+      paths: [],
+      fallback: true,
+    };
   }
 }
