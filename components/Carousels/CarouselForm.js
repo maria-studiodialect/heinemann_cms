@@ -6,7 +6,7 @@ import FormSection from '../ProductForm/Section';
 import MediaUpload from '../ProductForm/MediaUpload';
 import MediaUploadCare from '../ProductForm/MediaUploadcare';
 
-const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
+const CarouselForm = ({ defaultValues = {}, onFormSubmit, ...props }) => {
   const [brands, setBrands] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   const [slideType, setSlideType] = useState(null)
@@ -55,7 +55,7 @@ const CarouselForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     setIsChecked(!isChecked)
   }
 
-  const type = watch('type'); 
+  let type = watch('type'); 
   
   return (
     <div {...props} className="flex flex-col space-y-6">
