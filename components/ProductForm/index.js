@@ -101,7 +101,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
         <div className="grid grid-cols-2 gap-5">
         <Input
           name="product_type"
-          label="Product Type"
+          label="Product Range"
           type="text"
           error={errors.product_type ? errors.product_type.message : false}
           register={register('product_type', {

@@ -33,7 +33,7 @@ function EditableRFID({ productId, initialRFID = '0', location, onRFIDChange }) 
   };
 
   return (
-    <div className="editable-rfid">
+    <div className="editable-rfid pb-1">
       {isEditing ? (
         <input
           autoFocus
@@ -41,10 +41,10 @@ function EditableRFID({ productId, initialRFID = '0', location, onRFIDChange }) 
           defaultValue={rfid}
           onBlur={handleFieldBlur}
           onChange={(e) => setRFID(parseInt(e.target.value))}
-          className="editable-rfid__input w-12 text-center"
+          className="editable-rfid__input w-12 text-center bg-white mx-3"
         />
       ) : (
-        <span onClick={handleFieldClick} className="editable-rfid__value mx-3">
+        <span onClick={handleFieldClick} className="editable-rfid__value px-4 mx-3 bg-white rounded py-0.5">
           {rfid}
         </span>
       )}

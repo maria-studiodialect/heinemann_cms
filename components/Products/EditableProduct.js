@@ -3,6 +3,7 @@ import Image from 'next/image';
 import UpdateProduct from '../Product/UpdateProduct';
 import DeleteProduct from '../Product/DeleteProduct';
 import { AuthContext } from '../../stores/authContext';
+import EditableRFID from './EditableRFID';
 
 function EditableProduct({ mainProduct }) {
   const [product, setProduct] = useState(mainProduct);
@@ -45,7 +46,23 @@ function EditableProduct({ mainProduct }) {
   }
   return (
     <div>
-      <div className='flex justify-end mx-40 mb-2'>
+      <div className='flex justify-between items-center mx-40 mb-0'>
+      {role === 'admin' &&
+      <div className='flex space-x-2'>
+      <div className='bg-gray-100 rounded-t-xl py-1'>
+        <div className='text-sm text-center'>CPH</div>
+        <EditableRFID productId={mainProduct.id} initialRFID={mainProduct.rfid_copenhagen} location='copenhagen' />
+      </div>
+      <div className='bg-gray-100 rounded-t-xl py-1'>
+        <div className='text-sm text-center'>IST</div>
+        <EditableRFID productId={mainProduct.id} initialRFID={mainProduct.rfid_istanbul} location='istanbul' />
+      </div>
+      <div className='bg-gray-100 rounded-t-xl py-1'>
+        <div className='text-sm text-center'>SYD</div>
+        <EditableRFID productId={mainProduct.id} initialRFID={mainProduct.rfid_sydney} location='sydney' />
+      </div>
+    </div>
+      }
       {role === 'admin' &&
       <div className='space-x-2'>
         <UpdateProduct  product={mainProduct} />
@@ -58,6 +75,7 @@ function EditableProduct({ mainProduct }) {
             />
       </div>
       }  
+
       </div>
       <div className={`mx-40 flex ${product.video ? 'justify-center' : 'justify-between'} items-center bg-black text-white py-10 rounded-xl mb-5`}>
         {product.video === false &&
