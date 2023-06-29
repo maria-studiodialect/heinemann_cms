@@ -5,7 +5,7 @@ import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
 import CarouselForm from './CarouselForm'
 
-const AddSlide = ({ props }) => {
+const AddSlide = ({ location, ...props }) => {
     const [isOpen, setIsOpen] = useState(false)
     const handleClose = () => setIsOpen(false)
     const handleOpen = () => setIsOpen(true)
@@ -66,7 +66,7 @@ const AddSlide = ({ props }) => {
                         <Close onClick={handleClose} />
                     </Dialog.Title>
 
-                    <CarouselForm type={'Add'} onFormSubmit={onFormSubmit} />
+                    <CarouselForm type={'Add'} onFormSubmit={onFormSubmit} location={location} />
                     </Dialog.Panel>
                 </Transition.Child>
                 </div>

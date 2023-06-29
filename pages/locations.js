@@ -41,6 +41,9 @@ function Locations() {
         <div className="bg-[url('/FRA.webp')] bg-bottom  bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
           <Link href="">FRANKFURT</Link> 
         </div>
+        <div className="bg-[url('/water-bg.png')] bg-left bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
+          <Link href="/infrastor">INFRASTOR</Link> 
+        </div>
       </div>
     </div>
   )

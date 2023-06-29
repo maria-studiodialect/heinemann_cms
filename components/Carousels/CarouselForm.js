@@ -4,12 +4,14 @@ import Button from '../common/Button'
 import Input from '../common/Input'
 import FormSection from '../ProductForm/Section';
 import MediaUpload from '../ProductForm/MediaUpload';
-import MediaUploadCare from '../ProductForm/MediaUploadcare';
+import SingleUploadcare from '../ProductForm/SingleUploadcare';
 
-const CarouselForm = ({ defaultValues = {}, onFormSubmit, ...props }) => {
+const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...props }) => {
   const [brands, setBrands] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   const [slideType, setSlideType] = useState(null)
+
+  console.log(location)
 
   const {
     register,
@@ -22,8 +24,9 @@ const CarouselForm = ({ defaultValues = {}, onFormSubmit, ...props }) => {
 
   useEffect(() => {
     if (defaultValues) {
-      setValue('type', defaultValues.type)
+      setValue('slide_type', defaultValues.slide_type)
       setValue('title_logo', defaultValues.title_logo)
+      setValue('title_text', defaultValues.title_text)
       setValue('partner_logos', defaultValues.partner_logos)
       setValue('line_1', defaultValues.line_1)
       setValue('line_2', defaultValues.line_2)
@@ -33,40 +36,32 @@ const CarouselForm = ({ defaultValues = {}, onFormSubmit, ...props }) => {
       setValue('line_6', defaultValues.line_6)
       setValue('brand', defaultValues.brand)
     }
-  }, [defaultValues, setValue])
+  }, [])  
 
   const onSubmit = handleSubmit(async (data) => {
     await onFormSubmit(data)
     reset()
   })
 
-  useEffect(() => {
-    fetchBrands();
-  }, []);
-
-  const fetchBrands = async () => {
-    // Replace this URL with the API endpoint to fetch your brands data
-    const response = await fetch('/api/brands/getBrands');
-    const result = await response.json();
-    setBrands(result.data);
-  };
 
   function handleCheck() {
     setIsChecked(!isChecked)
   }
 
-  let type = watch('type'); 
+  let slide_type = watch('slide_type'); 
+
   
   return (
     <div {...props} className="flex flex-col space-y-6">
       <form>
         <div className='mb-2'>
-          <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Slide Type</label>
+          <label htmlFor="slide_type" className="mb-1 block text-sm font-medium text-gray-600">Slide Type</label>
           <select
-            {...register('type')}
-            defaultValue={defaultValues.type}
+            {...register('slide_type')}
+            name='slide_type'
+            defaultValue={defaultValues?.slide_type}
             className='border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2'
-          >
+          >  
             <option disabled value="">Select</option>
             <option value='hero'>Hero Screen</option>
             <option value='intro'>Intro Screen</option>
@@ -74,60 +69,50 @@ const CarouselForm = ({ defaultValues = {}, onFormSubmit, ...props }) => {
             <option value='brand'>Brand Screen</option>
           </select>
         </div>
-        <div className='mb-4'>
-        <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Main Logo</label>
-        <MediaUploadCare defaultValues={defaultValues?.media} setValue={setValue} />
-        </div>
+        <div>
+        {slide_type === 'brand' &&
         <Input
-            name="title"
-            label="Product Title"
+            name="brand"
+            label='Brand Name'
             type="text"
-            error={errors.title ? errors.title.message : false}
-            register={register('title', {
-              required: {
-                value: true,
-                message: 'Add a product title',
-              },
-            })}
+            error={errors.brand ? errors.brand.message : false}
+            register={register('brand')}
           />
-          <div className='grid grid-cols-2 gap-5'>
-          
-          </div>
-          {!isChecked &&
-            <>
-            <Input
-              name="description"
-              label="Description"
-              type="textarea"
-              textarea={true}
-              error={errors.description ? errors.description.message : false}
-              register={register('description')}
-            />
-            <Input
-              name="attributes"
-              label="Attributes"
-              type="text"
-              error={errors.attributes ? errors.attributes.message : false}
-              info="Separate values with a comma. Ex: 'Sweet & Round, Delicate & Floral'"
-              register={register('attributes')}
-              attributes={{
-                ...register('attributes', {
-                  setValueAs: (value) => {
-                    if (typeof value === 'string') {
-                      return value.split(',').map((type) => type.trim())
-                    }
-                    return []
-                  },
-                }),
-                type: 'text',
-                placeholder: 'Type 1, Type 2, Type 3',
-              }}
-            />
-            </>
-          }
+        }
+        {slide_type === 'intro' ?
+        <Input
+          name="title_text"
+          label='Title'
+          type="text"
+          error={errors.title_text ? errors.title_text.message : false}
+          register={register('title_text')}
+        />   
+        :
+        <div className='mb-4'>
+        <label htmlFor="logo" className="mb-1 block text-sm font-medium text-gray-600">Title Logo</label>
+        <SingleUploadcare defaultValues={defaultValues?.title_logo} setValue={setValue} value='title_logo' />
+        </div>
+        }
+        </div>
+      
+
+        <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Text</label>
+        {slide_type === 'intro' ? 
+          <textarea {...register('line_1')} name='line_1' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1 min-h-[15vh]'/>
+        :
+        <>
+          <input {...register('line_1')} name='line_1' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
+          <input {...register('line_2')} name='line_2' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
+          <input {...register('line_3')} name='line_3' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
+          <input {...register('line_4')} name='line_4' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
+          <input {...register('line_5')} name='line_5' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
+          <input {...register('line_6')} name='line_6' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
+          </>
+        }
+        <input type='hidden' name='location' {...register('location')} value={location}/>
       </form>
       <Button type="button" onClick={onSubmit} className="w-full">
-        {type ? `${type} Product` : 'Submit'}
+        {type ? `${type} Carousel` : 'Submit'}
       </Button>
     </div>
 

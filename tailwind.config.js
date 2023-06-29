@@ -8,8 +8,8 @@ module.exports = {
     extend: {
       fontSize: {
         xxs: ['0.65rem', '1rem'],
-        '2xs': ['0.47rem', '0.50rem'],
-        '3xs': ['0.40rem', '0.45rem'],
+        '2xs': ['0.52vw', '0.9vh'],
+        '3xs': ['0.50vw', '0.9vh'],
       },
       screens: {
         laptop: '1024px',

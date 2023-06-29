@@ -4,17 +4,14 @@ import React, { Fragment, useState } from 'react'
 import Button from '../common/Button'
 import { Close } from '../common/icons/Close'
 import ProductForm from '../ProductForm'
+import CarouselForm from './CarouselForm'
 
-const UpdateProduct = ({ product, ...props }) => {
-  console.log(product)
-  const [isOpen, setIsOpen] = useState(false)
-  const handleClose = () => setIsOpen(false)
-  const handleOpen = () => setIsOpen(true)
+const UpdateSlide = ({ product, updateIsOpen, handleClose, ...props }) => {
 
   const onFormSubmit = async (data) => {
     console.log(data)
     try {
-      await fetch(`/api/products/updateProduct`, {
+      await fetch(`/api/carousels/updateSlide`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -32,10 +29,7 @@ const UpdateProduct = ({ product, ...props }) => {
 
   return (
     <>
-      <Button onClick={handleOpen} type="button" {...props}>
-        Edit Content
-      </Button>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={updateIsOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={handleClose}>
           <Transition.Child
             as={Fragment}
@@ -65,11 +59,11 @@ const UpdateProduct = ({ product, ...props }) => {
                     as="div"
                     className="mb-5 flex items-center justify-between text-lg font-semibold leading-6 text-gray-800"
                   >
-                    <h3>Update Product</h3>
+                    <h3>Update Slide</h3>
                     <Close onClick={handleClose} />
                   </Dialog.Title>
 
-                  <ProductForm
+                  <CarouselForm
                     defaultValues={product}
                     onFormSubmit={onFormSubmit}
                     type={'Update'}
@@ -84,4 +78,4 @@ const UpdateProduct = ({ product, ...props }) => {
   )
 }
 
-export default UpdateProduct
+export default UpdateSlide

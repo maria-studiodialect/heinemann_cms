@@ -161,7 +161,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
               Product Media
           </label>
           <div className='border border-gray-200 rounded-md px-4 py-2'>
-        <MediaUploadCare defaultValues={defaultValues?.media} setValue={setValue} />
+        <MediaUploadCare defaultValues={defaultValues?.media} setValue={setValue} value='media' />
         </div>
         {/* <MediaUpload defaultValues={defaultValues?.media} setValue={setValue} /> */}
         </div>

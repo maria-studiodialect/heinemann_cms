@@ -41,7 +41,7 @@ const Sidebar = () => {
   
       <div
         className={clsx(
-          'h-max-content border-r-1 absolute w-screen p-3  transition-all duration-300 ease-in-out lg:relative lg:block lg:max-w-[15vw] lg:translate-x-0',
+          'h-screen border-r-1 absolute w-screen p-3  transition-all duration-300 ease-in-out lg:fixed lg:block lg:max-w-[15vw] lg:translate-x-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -64,7 +64,7 @@ const Sidebar = () => {
           )
           }
           </div>
-          <div>
+          <div  className='mx-auto'>
           {role === 'admin' &&           <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> Locations</Link>}  
           {role === 'copenhagen' &&           <Link href={'/copenhagen'} className={`${linkClass('/copenhagen')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> CPH</Link>}  
 
@@ -72,7 +72,7 @@ const Sidebar = () => {
           <Link href={'/products'} className={`${linkClass('/products')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoCart className='mr-3 text-xl'/> Products</Link>
           <div className={`${linkClass('/analytics')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><MdAnalytics className='mr-3 text-xl'/> Analytics</div>
           </div>
-          <div onClick={handleLogout} className='flex text-gray-400 hover:text-black hover:font-bold px-4 py-1.5 mx-2 cursor-pointer'><IoLogOut className='mr-3 text-xl'/> Sign Out</div>
+          <div onClick={handleLogout} className='flex text-gray-400 hover:text-black hover:font-bold px-4 py-1.5 mx-auto cursor-pointer'><IoLogOut className='mr-3 text-xl'/> Sign Out</div>
         </nav>
       </div>
     </>

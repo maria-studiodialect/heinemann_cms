@@ -30,7 +30,7 @@ function FloorLayout({ mainSlide }) {
         return <div>Loading...</div>;
     }
     return (
-        <div className="bg-[url('/water-bg.png')] bg-center bg-cover bg-no-repeat w-full h-[20vh] text-white flex flex-col items-center relative">
+        <div className="bg-[url('/water-bg.png')] bg-center bg-cover bg-no-repeat w-full aspect-[16/4] text-white flex flex-col items-center relative">
             {/* 
             <div className='flex justify-end mx-40 mb-2'>
             <div className='space-x-2'>
@@ -88,11 +88,11 @@ function FloorLayout({ mainSlide }) {
                 </div>
                 }
                 {slide.type === 'floor_intro' && (
-                    <div className='flex items-center'>
-                        <div className='relative h-7 w-40 mr-4'>
-                        <Image alt='logo' src={slide.title_logo} sizes='10vw' fill className='object-contain' />
+                    <div className='flex items-center justify-between'>
+                        <div className='relative w-28 h-full mx-4'>
+                        <Image alt='logo' src='/tax_free_heinemann.png' width={1357} height={368} className='object-contain' />
                         </div>
-                        <div className='min-w-[28vw] mr-4'>
+                        <div className='mr-4'>
                         <div>
                             {isEditing.line_1 ? (
                             <input

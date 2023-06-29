@@ -3,7 +3,7 @@ import Button from '../common/Button';
 import { Widget, uploadcare} from '@uploadcare/react-widget';
 
 
-const MediaUploadCare = ({ defaultValues, setValue }) => {
+const MediaUploadCare = ({ defaultValues, setValue, value }) => {
     const [existingImages, setExistingImages] = useState(null);
 
     // Simulated retrieval of existing image URLs for the product from your CMS or database
@@ -23,7 +23,7 @@ const MediaUploadCare = ({ defaultValues, setValue }) => {
         onFileSelect={async (group) => {
           const files = await Promise.all(group.files());
           const urls = files.map((file) => file.cdnUrl);
-          setValue('media', urls);
+          setValue(value, urls);
           console.log(urls)
         }}
         // Additional widget configuration options can be specified here

@@ -77,25 +77,23 @@ export default function Copenhagen(props) {
     // Replace this URL with the API endpoint to fetch your Slides data
     const response = await fetch('/api/carousels/getSlides');
     const result = await response.json();
-    setSlides(result.data);
+    const filteredSlides = result.data.filter(slide => slide.location.id === 'rec_cgukpvk4e8c96vs22t90')
+    setSlides(filteredSlides);
   };
-
-
-
 
   return (
     <div>
         <div className="flex justify-between mt-10 pb-5">
-        <div className="bg-gray-50">
+        <div className="bg-gray-50 flex-shrink-0">
           <div className="text-2xl font-bold text-black pl-4">Copenhagen</div>
-          <svg width="572" height="594" viewBox="0 0 572 594" fill="none" xmlns="http://www.w3.org/2000/svg" className="max-w-[35vw] max-h-[72vh]">
+          <svg width="572" height="594" viewBox="0 0 572 594" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-[60vh] w-[32vw] max-w-[35vw] max-h-[72vh]">
           <path d="M27.5 572V28.5H224.5L544 572H27.5Z" stroke="#9CA3AF" stroke-width="10"/>
-          <rect onClick={() => handleOpen(screens[0])} x="45" y="124" width="11" height="70" fill="#9CA3AF" className="cursor-pointer"/>
-          <rect onClick={() => handleOpen(screens[1])} x="126" y="153" width="11" height="70" transform="rotate(90 126 153)" fill="#9CA3AF" className="cursor-pointer"/>
-          <rect onClick={() => handleOpen(screens[2])}  x="329" y="363" width="11" height="70" transform="rotate(90 329 363)" fill="#9CA3AF" className="cursor-pointer"/>
-          <rect onClick={() => handleOpen(screens[3])}  x="417" y="484" width="11" height="70" transform="rotate(90 417 484)" fill="#9CA3AF" className="cursor-pointer"/>
-          <rect onClick={() => handleOpen(screens[4])}  x="115" y="483" width="11" height="70" transform="rotate(90 115 483)" fill="#9CA3AF" className="cursor-pointer"/>
-          <rect  onClick={() => handleFloorOpen(screens[5])}  x="161" y="146" width="62" height="244" fill="#9CA3AF" className="cursor-pointer"/>
+          <rect onClick={() => handleOpen(screens[0])} x="45" y="124" width="11" height="70" fill="#9CA3AF" className="cursor-pointer" hover:bg-gray-500 />
+          <rect onClick={() => handleOpen(screens[1])} x="126" y="153" width="11" height="70" transform="rotate(90 126 153)" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
+          <rect onClick={() => handleOpen(screens[2])}  x="329" y="363" width="11" height="70" transform="rotate(90 329 363)" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
+          <rect onClick={() => handleOpen(screens[3])}  x="417" y="484" width="11" height="70" transform="rotate(90 417 484)" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
+          <rect onClick={() => handleOpen(screens[4])}  x="115" y="483" width="11" height="70" transform="rotate(90 115 483)" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
+          <rect  onClick={() => handleFloorOpen(screens[5])}  x="161" y="146" width="62" height="244" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
           <rect x="375" y="414" width="11" height="70" fill="#9CA3AF" className="cursor-pointer"/>
           <path d="M95 77.5L99.5 82.5L104 97L110 100.5V109.5V125.5L104 130.5L95 133.5L76 130.5L64.5 125.5V116.5V97V82.5L73 77.5L82 74L95 77.5Z" stroke="#9CA3AF" stroke-width="3"/>
           <path d="M293.293 288.014L289.085 293.278L285.002 308.442L279.35 312.161L279.468 321.539L279.679 338.211L285.444 343.349L294.032 346.367L312.038 343.012L322.894 337.664L322.776 328.286L322.518 307.967L322.327 292.857L314.188 287.75L305.594 284.211L293.293 288.014Z" stroke="#9CA3AF" stroke-width="3"/>
@@ -110,9 +108,9 @@ export default function Copenhagen(props) {
           </svg>
         </div>
         <div>
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between items-center w-full flex-grow">
           <div className="text-xl pl-4">Carousel Slides</div>
-          {role === 'admin' && <AddSlide/>}
+          {role === 'admin' && <AddSlide location='rec_cgukpvk4e8c96vs22t90' />}
           </div>
           <div className="bg-gray-50 text-black drop-shadow-lg w-[37vw] mt-4 rounded-xl p-3">
             <div className="grid grid-cols-3 m-3 gap-3">
