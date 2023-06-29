@@ -6,7 +6,7 @@ import { IoIosRadioButtonOff, IoIosCheckmarkCircle } from 'react-icons/io'
 
 const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
     const [selectedSlideId, setSelectedSlideId] = useState(null);
-
+    
 
     useEffect(() => {
         const fetchCurrentSlideId = async () => {
@@ -39,8 +39,6 @@ const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
             console.log(error)
             }
         }
-
-    console.log(activeMapId)
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -78,7 +76,7 @@ const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
                     </Dialog.Title>
                     <div className="mb-1 block text-sm font-medium text-gray-600">Select the relevant brand slide</div>
                     <div className="grid grid-cols-3 p-3 gap-3 border rounded-md">
-                    {slides.filter(slide => slide.type === 'brand').map((slide, i) => (
+                    {slides.filter(slide => slide.slide_type === 'brand').map((slide, i) => (
                         <div key={i} className={`cursor-pointer px-2 pt-2 ${selectedSlideId === slide.id && 'bg-white shadow rounded-lg'}`} onClick={() => onSelect(slide.id)}>
                         <CarouselLayout mainSlide={slide}/>
                         <div className="text-center my-1 text-xs flex items-center">{selectedSlideId === slide.id ? <IoIosCheckmarkCircle/> : <IoIosRadioButtonOff/>}<div className='flex-1'>{slide.brand}</div></div>

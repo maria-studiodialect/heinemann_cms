@@ -92,6 +92,7 @@ export default function Copenhagen(props) {
     setSlides(filteredSlides);
   };
 
+
   return (
     <div>
         <div className="flex justify-between mt-10 pb-5">

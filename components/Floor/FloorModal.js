@@ -27,8 +27,8 @@ const FloorModal = ({ slides, activeId, activeMapId, isOpen, handleClose }) => {
             }
         }
         useEffect(() => {
-            const floor_1 = slides.find(slide => slide.type === 'floor_hero')
-            const floor_2 = slides.find(slide => slide.type === 'floor_intro')
+            const floor_1 = slides.find(slide => slide.slide_type === 'floor_hero')
+            const floor_2 = slides.find(slide => slide.slide_type === 'floor_intro')
             setFloorOne(floor_1);
             setFloorTwo(floor_2);
         }, [slides])
