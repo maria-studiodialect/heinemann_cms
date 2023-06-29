@@ -42,10 +42,10 @@ function FloorLayout({ mainSlide }) {
             </div>
             */}
             <div className='mt-6 mb-3'>
-                {slide.type === 'floor_hero' && <div className='text-4xl font-light mt-3 mr-28'>Fluid Perspectives</div>}
+                {slide.slide_type === 'floor_hero' && <div className='text-4xl font-light mt-3 mr-28'>Fluid Perspectives</div>}
             </div>
             <div className='px-3 w-full'>
-                {slide.type === 'floor_hero' &&
+                {slide.slide_type === 'floor_hero' &&
                 <div className='flex justify-end mr-14'>
                     {isEditing.line_1 ? (
                     <input
@@ -87,7 +87,7 @@ function FloorLayout({ mainSlide }) {
                     </div>
                 </div>
                 }
-                {slide.type === 'floor_intro' && (
+                {slide.slide_type === 'floor_intro' && (
                     <div className='flex items-center justify-between'>
                         <div className='relative w-28 h-full mx-4'>
                         <Image alt='logo' src='/tax_free_heinemann.png' width={1357} height={368} className='object-contain' />
