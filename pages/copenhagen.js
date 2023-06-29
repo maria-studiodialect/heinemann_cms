@@ -137,7 +137,7 @@ export default function Copenhagen(props) {
         </div> 
         <SetSlide isOpen={isOpen} activeId={activeScreen?.id}  activeMapId={activeScreen?.map_id} slides={slides} handleClose={handleClose}/>
         <FloorModal isOpen={isFloorOpen} activeId={activeScreen?.id}  activeMapId={activeScreen?.mapId} slides={slides} handleClose={handleFloorClose}/>
-        <UpdateSlide product={selectedSlide} updateIsOpen={updateIsOpen} handleClose={closeUpdate}/>
+        <UpdateSlide product={selectedSlide} updateIsOpen={updateIsOpen} handleClose={closeUpdate} location='rec_cgukpvk4e8c96vs22t90'/>
     </div>
   );
 }

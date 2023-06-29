@@ -6,7 +6,7 @@ import { Close } from '../common/icons/Close'
 import ProductForm from '../ProductForm'
 import CarouselForm from './CarouselForm'
 
-const UpdateSlide = ({ product, updateIsOpen, handleClose, ...props }) => {
+const UpdateSlide = ({ location, product, updateIsOpen, handleClose, ...props }) => {
 
   const onFormSubmit = async (data) => {
     console.log(data)
@@ -19,7 +19,7 @@ const UpdateSlide = ({ product, updateIsOpen, handleClose, ...props }) => {
         body: JSON.stringify({ id: product.id, ...data }),
       }).then(() => {
         handleClose()
-        window.location.reload()
+        // window.location.reload()
       })
     } catch (error) {
       console.error('Error updating the product:', error);
@@ -67,6 +67,7 @@ const UpdateSlide = ({ product, updateIsOpen, handleClose, ...props }) => {
                     defaultValues={product}
                     onFormSubmit={onFormSubmit}
                     type={'Update'}
+                    location={location}
                   />
                 </Dialog.Panel>
               </Transition.Child>

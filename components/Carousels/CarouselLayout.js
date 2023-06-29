@@ -27,7 +27,7 @@ function CarouselLayout({ mainSlide, click }) {
             <div className='mt-5 mb-2'>
                 {(slide.slide_type === 'brand' || slide.slide_type === 'city') && <div className='relative h-8 w-20'><Image alt='logo' src={slide.title_logo} sizes="10vw" fill className='object-contain'/></div>}
                 {slide.slide_type === 'hero' && <div className='text-[1.5vw] leading-[2.8vh] font-light mx-3'>Fluid<br/><span className='ml-4'>Perspectives</span></div>}
-                {slide.slide_type === 'intro' && <div className='text-[1vw] mt-3 font-light'>Fluid Perspectives</div>}
+                {slide.slide_type === 'intro' && <div className='text-[1vw] mt-3 font-light'>{slide.title_text}</div>}
             </div>
             <div className='px-3 w-full'>
                 <div className={`${slide.slide_type === 'intro' ? 'text-center text-3xs mx-3' : 'text-2xs'} ${slide.slide_type === 'hero' && 'text-center'} ${(slide.slide_type === 'brand' || slide.slide_type === 'city') && 'text-left ml-3'}`}>{slide.line_1}</div>
