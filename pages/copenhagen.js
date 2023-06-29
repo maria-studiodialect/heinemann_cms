@@ -11,6 +11,7 @@ import { Close } from "../components/common/icons/Close";
 import SetSlide from "../components/Carousels/SetSlide";
 import FloorModal from "../components/Floor/FloorModal";
 import { AuthContext } from "../stores/authContext";
+import UpdateSlide from "../components/Carousels/UpdateSlide";
 
 export default function Copenhagen(props) {
   const {
@@ -30,6 +31,8 @@ export default function Copenhagen(props) {
   let [isFloorOpen, setIsFloorOpen] = useState(false)
   const {user} = useContext(AuthContext)
   const [role, setRole] = useState(null)
+  let [updateIsOpen, setUpdateIsOpen] = useState(false)
+  const [selectedSlide, setSelectedSlide] = useState(null)
 
   useEffect(() => {
     setRole(user?.app_metadata.roles[0])
@@ -44,6 +47,14 @@ export default function Copenhagen(props) {
     setIsOpen(true)
   }
 
+  function handleUpdate(id) {
+    setSelectedSlide(id)
+    setUpdateIsOpen(true)
+  }
+
+  function closeUpdate() {
+    setUpdateIsOpen(false)
+  }
 
   function handleFloorOpen(num) {
     setActiveScreen(num)
@@ -88,7 +99,7 @@ export default function Copenhagen(props) {
           <div className="text-2xl font-bold text-black pl-4">Copenhagen</div>
           <svg width="572" height="594" viewBox="0 0 572 594" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-[60vh] w-[32vw] max-w-[35vw] max-h-[72vh]">
           <path d="M27.5 572V28.5H224.5L544 572H27.5Z" stroke="#9CA3AF" stroke-width="10"/>
-          <rect onClick={() => handleOpen(screens[0])} x="45" y="124" width="11" height="70" fill="#9CA3AF" className="cursor-pointer" hover:bg-gray-500 />
+          <rect onClick={() => handleOpen(screens[0])} x="45" y="124" width="11" height="70" fill="#9CA3AF" className="cursor-pointe hover:bg-gray-500"  />
           <rect onClick={() => handleOpen(screens[1])} x="126" y="153" width="11" height="70" transform="rotate(90 126 153)" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
           <rect onClick={() => handleOpen(screens[2])}  x="329" y="363" width="11" height="70" transform="rotate(90 329 363)" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
           <rect onClick={() => handleOpen(screens[3])}  x="417" y="484" width="11" height="70" transform="rotate(90 417 484)" fill="#9CA3AF" className="cursor-pointer hover:bg-gray-500"/>
@@ -114,8 +125,8 @@ export default function Copenhagen(props) {
           </div>
           <div className="bg-gray-50 text-black drop-shadow-lg w-[37vw] mt-4 rounded-xl p-3">
             <div className="grid grid-cols-3 m-3 gap-3">
-            {slides.filter(slide => !slide.type.includes('floor')).map((slide, i) => (
-              <div key={i}>
+            {slides.filter(slide => !slide.slide_type.includes('floor')).map((slide, i) => (
+              <div key={i} onClick={() => handleUpdate(slide)} className="cursor-pointer">
               <CarouselLayout mainSlide={slide}/>
               </div>
             ))}
@@ -125,6 +136,7 @@ export default function Copenhagen(props) {
         </div> 
         <SetSlide isOpen={isOpen} activeId={activeScreen?.id}  activeMapId={activeScreen?.map_id} slides={slides} handleClose={handleClose}/>
         <FloorModal isOpen={isFloorOpen} activeId={activeScreen?.id}  activeMapId={activeScreen?.mapId} slides={slides} handleClose={handleFloorClose}/>
+        <UpdateSlide product={selectedSlide} updateIsOpen={updateIsOpen} handleClose={closeUpdate}/>
     </div>
   );
 }
