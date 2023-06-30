@@ -60,8 +60,8 @@ const Sidebar = () => {
             <div className='mt-10 flex'>
             <div><ImUser className='mr-3 text-xl'/></div>
             <div>
-              {/*<div className='text-sm font-bold'>{user?.user_metadata.full_name}</div>*/}
-              <div className='text-sm font-bold'>Username</div>
+              <div className='text-sm font-bold'>{user?.user_metadata.full_name}</div>
+              {/*<div className='text-sm font-bold'>Username</div>*/}
               <div className='text-sm text-gray-400 capitalize'>{user?.app_metadata.roles[0]}</div>
             </div>
             </div>
