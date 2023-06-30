@@ -20,7 +20,7 @@ const AddSlide = ({ location, ...props }) => {
             body: JSON.stringify(data),
         }).then(() => {
             handleClose()
-            // window.location.reload()
+            window.location.reload()
         })
         } catch (error) {
         console.log(error)

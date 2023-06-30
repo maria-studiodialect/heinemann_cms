@@ -16,8 +16,6 @@ const ProductItem = ({ id, title, brand, rfid_copenhagen, rfid_istanbul, product
     setRole(user?.app_metadata.roles[0])
   }, [user])
 
-  console.log(role)
-
   return (
     <div className={`my-2 grid ${role !== 'admin' ? 'grid-cols-[2fr_1fr_1fr_1fr]' : 'grid-cols-[2fr_1fr_1fr_0.1fr_0.5fr]'} cursor-pointer rounded-md border px-3 py-4 shadow-sm hover:shadow-md lg:px-6`}>
       {router.pathname !== '/products_simple' ? <Link href={`/product/${id}`}><p className="flex-1 truncate font-medium hover:underline">{title}</p></Link> : <p className="flex-1 truncate font-medium">{title}</p>}

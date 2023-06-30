@@ -31,7 +31,7 @@ function Locations() {
       <header className="mt-3 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-black">Locations</h1>
       </header>
-      <div className="grid grid-cols-3 mt-5 gap-2 p-2">
+      <div className="grid grid-cols-2 mt-5 gap-2 p-2">
         <div className="bg-[url('/CPH.jpg')] bg-center bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
           <Link href="/copenhagen">COPENHAGEN</Link>
         </div>

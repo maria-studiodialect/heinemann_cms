@@ -91,7 +91,7 @@ function EditableProduct({ mainProduct }) {
             <div className="relative mb-8 w-[20vw] mx-auto">
                   <Image src={product.brand.logo} width={537} height={324} onLoadingComplete={e => setMeasurements(e)} className="w-full h-auto object-contain max-h-[20vh]"/>
             </div>
-            {product.video &&
+            {product.video && product.media &&
               <video autoPlay muted loop className='mb-5'>
                 <source src={product.media[0]} />
               </video>
@@ -110,7 +110,7 @@ function EditableProduct({ mainProduct }) {
                 )}
             </div>
             <div className="my-10 mx-10">{product.description}</div>
-            {product.attributes && <div className="uppercase text-xxs tracking-wide mb-2">Attributes</div>}
+            {!product.video && <div className="uppercase text-xxs tracking-wide mb-2">Attributes</div>}
             <div className="mb-10 flex justify-center">
               
                 {product.attributes?.map((item, i) => (

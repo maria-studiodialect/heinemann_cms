@@ -20,6 +20,7 @@ const MediaUploadCare = ({ defaultValues, setValue, value }) => {
         value={existingImages}
         previewStep
         multiple
+        tabs='file url'
         onFileSelect={async (group) => {
           const files = await Promise.all(group.files());
           const urls = files.map((file) => file.cdnUrl);

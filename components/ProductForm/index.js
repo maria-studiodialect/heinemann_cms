@@ -10,7 +10,7 @@ import MediaUploadCare from './MediaUploadcare';
 
 const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   const [brands, setBrands] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(defaultValues?.video);
 
   const {
     register,
@@ -31,9 +31,8 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
       }
       setValue('brand', defaultValues.brand);
       setValue('video', defaultValues.video);
-      setIsChecked(defaultValues.video);
     }
-  }, [defaultValues, setValue]);
+  }, [defaultValues, setValue, setIsChecked]);
 
   useEffect(() => {
     fetchBrands();
@@ -46,8 +45,8 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     setBrands(result.data);
   };
 
-  function handleCheck() {
-    setIsChecked(!isChecked);
+  const handleCheck = (e) => {
+    setIsChecked(e.target.checked);
   }
 
   const onSubmit = handleSubmit(async (data) => {
@@ -61,7 +60,8 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   });
 
 
-  // console.log(defaultValues)
+  console.log('Default Values', defaultValues.video)
+  console.log('Default Values', defaultValues.video)
 
   return (
     <div {...props} className="flex flex-col space-y-4">
@@ -76,7 +76,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
                 checked={isChecked}
                 className="sr-only"
                 {...register('video')}
-                onClick={handleCheck}
+                onChange={handleCheck}
               />
               <div className="bg block bg-gray-600 w-10 h-6 rounded-full"></div>
               <div className="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>

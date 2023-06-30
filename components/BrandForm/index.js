@@ -4,6 +4,7 @@ import Button from '../common/Button'
 import Input from '../common/Input'
 import FormSection from '../ProductForm/Section'
 import ThumbnailUpload from '../ProductForm/ThumbnailUpload'
+import SingleUploadCare from '../ProductForm/SingleUploadcare';
 
 const BrandForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   const [brands, setBrands] = useState([]);
@@ -19,7 +20,7 @@ const BrandForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   useEffect(() => {
     if (defaultValues) {
       setValue('title', defaultValues.title)
-      setValue('description', defaultValues.description)
+      setValue('logo', defaultValues.logo)
     }
   }, [defaultValues, setValue])
 
@@ -29,7 +30,6 @@ const BrandForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   return (
     <div {...props} className="flex flex-col space-y-6">
       <form>
-        <FormSection defaultOpen={true} title={'Brand Information'}>
         <Input
             name="title"
             label="Brand Name"
@@ -42,20 +42,20 @@ const BrandForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
               },
             })}
           />
+          <div>
+          <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">
+            Brand Logo
+          </label>
+          <div className='border border-gray-300 rounded-md px-4 py-2'>
+          <SingleUploadCare defaultValue={defaultValues?.logo} setValue={setValue} value='logo' />
           
-          <Input
-            name="description"
-            label="Description"
-            type="textarea"
-            textarea={true}
-            error={errors.description ? errors.description.message : false}
-            register={register('description')}
-          />
-        </FormSection>
+        </div>
+        <p className="mt-2 text-xs text-gray-500">Please upload a white version of the logo in PNG format.</p>
+        {/* <MediaUpload defaultValues={defaultValues?.media} setValue={setValue} /> */}
+        </div>
+        
+
       </form>
-      <FormSection title={'Brand Logo'}>
-        <ThumbnailUpload defaultValue={defaultValues?.logo} setValue={setValue} info='Please upload a white version of the logo in PNG format.' />
-      </FormSection>
 
 
       <Button type="button" onClick={onSubmit} className="w-full">

@@ -11,8 +11,6 @@ const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...pro
   const [isChecked, setIsChecked] = useState(false);
   const [slideType, setSlideType] = useState(null)
 
-  console.log(location)
-
   const {
     register,
     handleSubmit,
@@ -43,10 +41,6 @@ const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...pro
     reset()
   })
 
-
-  function handleCheck() {
-    setIsChecked(!isChecked)
-  }
 
   let slide_type = watch('slide_type'); 
 

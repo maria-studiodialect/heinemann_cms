@@ -2,7 +2,6 @@ import React from 'react'
 import ProductItem from './ProductItem'
 
 const ProductItems = ({ products }) => {
-  console.log(products)
   return (
     <div className="block h-[74vh] overflow-y-scroll rounded-lg border p-2 xxl:max-h-[70vh]">
       <div className='pb-0.5'>

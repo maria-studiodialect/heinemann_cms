@@ -17,6 +17,7 @@ const SingleUploadCare = ({ defaultValues, setValue, value }) => {
   return (
     <Widget
       publicKey="d1bca3d0aa1a701e05e2"
+      tabs='file url'
       value={existingImages}
       onFileSelect={(e) => {
         e.done((file) => setValue(value, file.cdnUrl));

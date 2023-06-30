@@ -48,7 +48,8 @@ function Products() {
       // otherwise, filter the products based on search query
       const filteredProducts = fullProducts.filter((product) =>
         product.title.toLowerCase().includes(searchQuery) ||
-        product.brand.title.toLowerCase().includes(searchQuery)
+        product.brand.title.toLowerCase().includes(searchQuery) ||
+        product.product_type.toLowerCase().includes(searchQuery)
       );
       setProducts(filteredProducts);
     }

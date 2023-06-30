@@ -19,7 +19,7 @@ const UpdateSlide = ({ location, product, updateIsOpen, handleClose, ...props })
         body: JSON.stringify({ id: product.id, ...data }),
       }).then(() => {
         handleClose()
-        // window.location.reload()
+        window.location.reload()
       })
     } catch (error) {
       console.error('Error updating the product:', error);
