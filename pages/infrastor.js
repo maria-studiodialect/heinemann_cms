@@ -97,12 +97,12 @@ export default function Infrastor(props) {
 
   return (
     <div>
-        <div className="flex justify-between mt-10 pb-5">
+        <div className="flex justify-between mt-5 pb-5">
         <div className="bg-gray-50 flex-shrink-0">
           <div className="text-2xl font-bold text-black pl-4">Infrastor</div>
           <div className="bg-gray-50 mt-4 p-3 drop-shadow-lg rounded-xl ml-4">
           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 786.9 495.3" className="h-[40vh] w-[32vw] max-w-[35vw] max-h-[72vh]">
+            viewBox="0 0 786.9 495.3" className="h-[50vh] w-[38vw] max-w-[38vw] max-h-[72vh]">
           <a onClick={() => handleOpen(screens[0])} className="hover:cursor-pointer">
             <rect x="52" y="61" fill='#9CA3AF' width="14.1" height="145.2" className="hover:fill-gray-500"/>
           </a>
@@ -129,11 +129,19 @@ export default function Infrastor(props) {
           <div className="text-xl pl-4">Carousel Slides</div>
           {role === 'admin' && <AddSlide location='rec_cidglo21vg9gsv775ibg' />}
           </div>
-          <div className="bg-gray-50 text-black drop-shadow-lg w-[37vw] mt-4 rounded-xl p-3">
+          <div className="bg-gray-50 text-black drop-shadow-lg w-[37vw] my-2 rounded-xl p-3">
             <div className="grid grid-cols-3 m-3 gap-3">
-            {slides.filter(slide => !slide.slide_type.includes('floor')).map((slide, i) => (
+            {slides.filter(slide => !slide.slide_type.includes('floor') && !slide.slide_type.includes('brand')).map((slide, i) => (
               <div key={i} onClick={() => handleUpdate(slide)} className="cursor-pointer">
-                <CarouselLayout mainSlide={slide}/>
+              <CarouselLayout mainSlide={slide}/>
+              </div>
+            ))}
+            </div>
+            <div className="text-lg pl-4">Brand Slides</div>
+            <div className="grid grid-cols-3 m-3 gap-3">
+            {slides.filter(slide => slide.slide_type.includes('brand')).map((slide, i) => (
+              <div key={i} onClick={() => handleUpdate(slide)} className="cursor-pointer">
+              <CarouselLayout mainSlide={slide}/>
               </div>
             ))}
             </div>
