@@ -12,6 +12,7 @@ import SetSlide from "../components/Carousels/SetSlide";
 import FloorModal from "../components/Floor/FloorModal";
 import { AuthContext } from "../stores/authContext";
 import UpdateSlide from "../components/Carousels/UpdateSlide";
+import Image from "next/image";
 
 export default function Copenhagen(props) {
   const {
@@ -99,38 +100,52 @@ export default function Copenhagen(props) {
 
   return (
     <div>
-        <div className="flex justify-between mt-10 pb-5">
+        <div className="flex justify-between mt-5 pb-5">
         <div className="bg-gray-50 flex-shrink-0">
-          <div className="text-2xl font-bold text-black pl-4">Copenhagen</div>
-          <svg width="572" height="594" viewBox="0 0 572 594" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-[60vh] w-[32vw] max-w-[35vw] max-h-[72vh]">
-          <path d="M27.5 572V28.5H224.5L544 572H27.5Z" stroke="#9CA3AF" stroke-width="10"/>
-          <rect onClick={() => handleOpen(screens[0])} x="45" y="124" width="11" height="70" fill="#9CA3AF" className="cursor-pointe hover:fill-gray-500"  />
-          <rect onClick={() => handleOpen(screens[1])} x="126" y="153" width="11" height="70" transform="rotate(90 126 153)" fill="#9CA3AF" className="cursor-pointer hover:fill-gray-500"/>
-          <rect onClick={() => handleOpen(screens[2])}  x="329" y="363" width="11" height="70" transform="rotate(90 329 363)" fill="#9CA3AF" className="cursor-pointer hover:fill-gray-500"/>
-          <rect onClick={() => handleOpen(screens[3])}  x="417" y="484" width="11" height="70" transform="rotate(90 417 484)" fill="#9CA3AF" className="cursor-pointer hover:fill-gray-500"/>
-          <rect onClick={() => handleOpen(screens[4])}  x="115" y="483" width="11" height="70" transform="rotate(90 115 483)" fill="#9CA3AF" className="cursor-pointer hover:fill-gray-500"/>
-          <rect  onClick={() => handleFloorOpen(screens[5])}  x="161" y="146" width="62" height="244" fill="#9CA3AF" className="cursor-pointer hover:fill-gray-500"/>
-          <rect x="375" y="414" width="11" height="70" fill="#9CA3AF" className="cursor-pointer"/>
-          <path d="M95 77.5L99.5 82.5L104 97L110 100.5V109.5V125.5L104 130.5L95 133.5L76 130.5L64.5 125.5V116.5V97V82.5L73 77.5L82 74L95 77.5Z" stroke="#9CA3AF" stroke-width="3"/>
-          <path d="M293.293 288.014L289.085 293.278L285.002 308.442L279.35 312.161L279.468 321.539L279.679 338.211L285.444 343.349L294.032 346.367L312.038 343.012L322.894 337.664L322.776 328.286L322.518 307.967L322.327 292.857L314.188 287.75L305.594 284.211L293.293 288.014Z" stroke="#9CA3AF" stroke-width="3"/>
-          <path d="M125 97H116.5L108.5 92.5L104 81.5L110 75.5L120.5 78L130 89L125 97Z" stroke="#9CA3AF" stroke-width="3"/>
-          <path d="M281.418 289.397L283.464 297.801L281.418 306L270.129 316.758L260.739 310.142L261.036 299.074L271.176 286.655L281.418 289.397Z" stroke="#9CA3AF" stroke-width="3"/>
-          <rect x="59.5" y="167.5" width="66" height="23" stroke="#9CA3AF" stroke-width="3"/>
-          <rect x="260.5" y="377.5" width="66" height="23" stroke="#9CA3AF" stroke-width="3"/>
-          <rect x="372.5" y="415.5" width="66" height="23" transform="rotate(90 372.5 415.5)" stroke="#9CA3AF" stroke-width="3"/>
-          <path d="M57 531.5L49.5 519.5V508.5L60.5 501L70.5 515V531.5L60.5 536L57 531.5Z" stroke="#9CA3AF" stroke-width="3"/>
-          <path d="M87 551L77 541V531.5V513L90.5 507L113.5 508.5L119.5 519.5L109.5 541L102 551H87Z" stroke="#9CA3AF" stroke-width="3"/>
-          <circle cx="361" cy="383" r="21.5" stroke="#9CA3AF" stroke-width="3"/>
-          </svg>
+          <div className="text-2xl font-bold text-black pl-4 pb-3">Copenhagen</div>
+          <div className="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 1088.72" className="absolute top-0 left-0 h-[82vh] w-[38vw] max-w-[38vw] max-h-[72vh]">
+              <image href="/cph_floorplan.png" width={1082} height={1088.72}/>
+              <g id="Layer_11" class="opacity-10 hover:opacity-60 cursor-pointer" onClick={() => handleOpen(screens[0])}>
+              <rect class="fill-white" x="29.27" y="283.48" width="22.02" height="129.6"/>
+              </g>
+              <g id="Layer_10" class="opacity-10 hover:opacity-60 cursor-pointer" onClick={() => handleOpen(screens[1])}>
+              <rect class="fill-white" x="55.53" y="334.31" width="128.75" height="25.41"/>
+              </g>
+              <g id="Layer_9" class="opacity-10 hover:opacity-60 cursor-pointer" onClick={() => handleOpen(screens[2])}>
+              <rect class="fill-white" x="423.15" y="489.32" width="131.29" height="32.19"/>
+              </g>
+              <g id="Layer_8" class="opacity-10 hover:opacity-60 cursor-pointer" onClick={() => handleOpen(screens[3])}>
+              <rect class="fill-white" x="690.82" y="843.39" width="132.14" height="24.56"/>
+              </g>
+              <g id="Layer_7" class="opacity-10 hover:opacity-60 cursor-pointer" onClick={() => handleOpen(screens[4])}>
+              <rect class="fill-white" x="823.96" y="793.95" width="22.87" height="128.93"/>
+              </g>
+              <g id="Layer_6" class="opacity-10">
+              <rect class="fill-white" x="27.57" y="887.43" width="128.75" height="20.33"/>
+              </g>
+              <g id="Layer_5" class="opacity-10 hover:opacity-60 cursor-pointer" onClick={() => handleFloorOpen(screens[5])}>
+              <rect class="fill-white" x="258.82" y="315.67" width="105.04" height="411.67"/>
+              </g>
+            </svg>
+          </div>
         </div>
         <div>
           <div className="flex justify-between items-center w-full flex-grow">
-          <div className="text-xl pl-4">Carousel Slides</div>
+          <div className="text-lg pl-4">Carousel Slides</div>
           {role === 'admin' && <AddSlide location='rec_cgukpvk4e8c96vs22t90' />}
           </div>
-          <div className="bg-gray-50 text-black drop-shadow-lg w-[37vw] mt-4 rounded-xl p-3">
+          <div className="bg-gray-50 text-black drop-shadow-lg w-[37vw] my-2 rounded-xl p-3">
             <div className="grid grid-cols-3 m-3 gap-3">
-            {slides.filter(slide => !slide.slide_type.includes('floor')).map((slide, i) => (
+            {slides.filter(slide => !slide.slide_type.includes('floor') && !slide.slide_type.includes('brand')).map((slide, i) => (
+              <div key={i} onClick={() => handleUpdate(slide)} className="cursor-pointer">
+              <CarouselLayout mainSlide={slide}/>
+              </div>
+            ))}
+            </div>
+            <div className="text-lg pl-4">Brand Slides</div>
+            <div className="grid grid-cols-3 m-3 gap-3">
+            {slides.filter(slide => slide.slide_type.includes('brand')).map((slide, i) => (
               <div key={i} onClick={() => handleUpdate(slide)} className="cursor-pointer">
               <CarouselLayout mainSlide={slide}/>
               </div>

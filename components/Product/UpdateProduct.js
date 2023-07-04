@@ -6,13 +6,11 @@ import { Close } from '../common/icons/Close'
 import ProductForm from '../ProductForm'
 
 const UpdateProduct = ({ product, ...props }) => {
-  console.log(product)
   const [isOpen, setIsOpen] = useState(false)
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
 
   const onFormSubmit = async (data) => {
-    console.log(data)
     try {
       await fetch(`/api/products/updateProduct`, {
         method: 'PUT',

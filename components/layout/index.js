@@ -15,14 +15,11 @@ const Layout = ({ meta, children, ...props }) => {
   }
   return (
     <>
-    {(router.pathname === '/copenhagen') && <div className="bg-[url('/CPH.jpg')] bg-center bg-cover bg-no-repeat w-screen h-[15vh] position absolute top-0 left-0"></div>}
-    {(router.pathname === '/infrastor') && <div className="bg-[url('/water-bg-90.png')] bg-center bg-cover bg-no-repeat w-screen h-[15vh] position absolute top-0 left-0"></div>}
-
     <div className="max-w-screen min-h-screen lg:flex">
       <Meta {...meta} />
       <div className='w-[16vw]'><Sidebar /></div>
-      <div className={`mx-auto flex w-[100%] ${(router.pathname === '/copenhagen' || router.pathname === '/infrastor') && 'max-w-screen-xl mt-8'}  flex-col mt-3`}>
-        <main className={`flex-1 px-2 py-2 md:px-6 ${(router.pathname === '/copenhagen' || router.pathname === '/infrastor') && 'mt-[10vh]'}`} {...props}>
+      <div className={`mx-auto flex w-[100%]  flex-col mt-3`}>
+        <main className={`flex-1 px-2 py-2 md:px-6`} {...props}>
           {children}
         </main>
         {router.pathname === '/' && <Footer />}

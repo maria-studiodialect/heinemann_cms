@@ -12,7 +12,7 @@ function CarouselLayout({ mainSlide, click }) {
         return <div>Loading...</div>;
     }
     return (
-        <div className="bg-[url('/water-bg.png')] bg-center bg-cover bg-no-repeat w-full aspect-[9/16] text-white flex flex-col items-center relative">
+        <div className="bg-[url('/water-bg.png')] bg-center bg-cover bg-no-repeat w-full aspect-[9/15] text-white flex flex-col items-center relative">
             {/* 
             <div className='flex justify-end mx-40 mb-2'>
             <div className='space-x-2'>

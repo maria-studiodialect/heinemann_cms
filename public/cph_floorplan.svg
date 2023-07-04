@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 819.26 759.81">
+<defs><style>.cls-1{opacity:.1;}.cls-2{fill:#fff;}</style></defs>
+<g id="Layer_11" className="cls-1"><rect className="cls-2" x="1.69" y="57.6" width="22.02" height="129.6"/></g>
+<g id="Layer_10" className="cls-1"><rect className="cls-2" x="27.95" y="108.42" width="128.75" height="25.41"/></g>
+<g id="Layer_9" className="cls-1"><rect className="cls-2" x="395.58" y="263.43" width="131.29" height="32.19"/></g>
+<g id="Layer_8" className="cls-1"><rect className="cls-2" x="663.25" y="617.5" width="132.14" height="24.56"/></g>
+<g id="Layer_7" className="cls-1"><rect className="cls-2" x="796.39" y="568.07" width="22.87" height="128.93"/></g>
+<g id="Layer_6" className="cls-1"><rect className="cls-2" y="661.55" width="128.75" height="20.33"/></g>
+<g id="Layer_5" className="cls-1"><rect className="cls-2" x="231.25" y="89.79" width="105.04" height="411.67"/></g>
+<g id="Layer_4" className="cls-1">
+    <polygon className="cls-2" points="51.67 63.53 51.67 41.51 51.67 21.18 51.67 8.47 77.08 0 110.96 11.86 116.05 22.02 122.82 11.01 137.22 5.08 156.71 16.94 163.48 26.26 163.48 37.27 156.71 49.13 139.76 57.6 125.36 57.6 127.91 77.93 127.91 89.79 125.36 101.65 111.81 108.42 65.22 101.65 51.67 89.79 51.67 63.53"/>
+</g>
+<g id="Layer_3" className="cls-1">
+    <polygon className="cls-2" points="409.13 160.09 395.58 171.11 387.11 187.2 395.58 201.6 404.05 204.99 420.99 204.99 420.99 234.63 420.99 249.03 432 259.2 461.22 259.2 489.6 252.42 498.92 241.41 498.92 214.31 498.92 193.98 498.92 178.84 498.92 163.48 482.82 160.09 472.66 155.01 457.41 155.01 448.94 166.87 443.01 174.49 434.54 178.84 428.61 166.87 418.45 161.79 409.13 160.09"/>
+</g>
+<g id="Layer_2" className="cls-1">
+    <polygon className="cls-2" points="27.95 688.66 33.88 704.75 43.2 704.75 60.99 696.7 68.61 696.7 72.85 704.75 59.29 713.22 58.45 725.93 56.75 739.48 59.29 751.34 72.85 759.81 103.34 759.81 121.13 753.88 128.75 748.8 134.68 736.94 134.68 719.15 134.68 708.14 128.75 683.43 29.65 683.5 27.95 688.66"/>
+</g>
+</svg>

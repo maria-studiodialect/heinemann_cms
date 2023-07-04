@@ -35,10 +35,10 @@ function Locations() {
         <div className="bg-[url('/CPH.jpg')] bg-center bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
           <Link href="/copenhagen">COPENHAGEN</Link>
         </div>
-        <div className="bg-[url('/ist.jpg')] bg-center bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
+        <div className="bg-[url('/istanbul.webp')] bg-center bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
           <Link href="">ISTANBUL</Link>
         </div>
-        <div className="bg-[url('/FRA.webp')] bg-bottom  bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
+        <div className="bg-[url('/frankfurt.webp')] bg-bottom  bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
           <Link href="">FRANKFURT</Link> 
         </div>
         <div className="bg-[url('/water-bg.png')] bg-left bg-cover bg-no-repeat text-gray-100 flex justify-center items-center rounded-xl h-[30vh] text-2xl font-medium drop-shadow-lg hover:opacity-70">
