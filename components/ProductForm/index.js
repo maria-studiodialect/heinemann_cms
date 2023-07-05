@@ -107,7 +107,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
           register={register('product_type', {
             required: {
               value: true,
-              message: 'Add a product type',
+              message: 'Add a product range',
             },
           })}
         />

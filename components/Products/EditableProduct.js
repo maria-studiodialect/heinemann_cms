@@ -86,7 +86,7 @@ function EditableProduct({ mainProduct }) {
     </div>
       }
       </div>
-      <div className={`flex ${product.video ? 'justify-center' : 'justify-between'} items-start bg-[url('/${selection}.webp')] bg-center bg-cover bg-no-repeat text-white pb-10 pt-14 rounded-xl mb-5 aspect-[9/16] max-h-[90vh]`}>
+      <div style={{backgroundImage: `url('/${selection}.webp')`}} className={`flex ${product.video ? 'justify-center' : 'justify-between'} items-start bg-center bg-cover bg-no-repeat text-white pb-10 pt-14 rounded-xl mb-5 aspect-[9/16] max-h-[90vh]`}>
         {product.video === false &&
         <div className='mt-[7vh]'>
                 {product.media?.map((item, i) => (

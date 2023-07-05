@@ -16,7 +16,7 @@ const ProductHeader = () => {
         Brand
       </div>
       <div className="flex-1 text-right font-semibold lg:text-left">
-        Product Type
+        Product Range
       </div>
       {role !== 'admin' && (
       <div className="flex-1 text-right font-semibold lg:text-left">

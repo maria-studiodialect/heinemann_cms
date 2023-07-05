@@ -104,7 +104,7 @@ export default function Copenhagen(props) {
         <div className="bg-gray-50 flex-shrink-0">
           <div className="text-2xl font-bold text-black pl-4 pb-3">Copenhagen</div>
           <div className="relative">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 1088.72" className="absolute top-0 left-0 h-[82vh] w-[38vw] max-w-[38vw] max-h-[72vh]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1082 1088.72" className="absolute top-7 left-0 h-[82vh] w-[38vw] max-w-[38vw] max-h-[72vh]">
               <image href="/cph_floorplan.png" width={1082} height={1088.72}/>
               <g id="Layer_11" class="opacity-10 hover:opacity-60 cursor-pointer" onClick={() => handleOpen(screens[0])}>
               <rect class="fill-white" x="29.27" y="283.48" width="22.02" height="129.6"/>
