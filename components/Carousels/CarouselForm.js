@@ -80,7 +80,8 @@ const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...pro
           type="text"
           error={errors.title_text ? errors.title_text.message : false}
           register={register('title_text')}
-        />   
+        />
+        
         :
         <div className='mb-4'>
         <label htmlFor="logo" className="mb-1 block text-sm font-medium text-gray-600">Title Logo</label>
