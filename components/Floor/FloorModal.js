@@ -3,7 +3,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Close } from '../common/icons/Close'
 import CarouselLayout from '../Carousels/CarouselLayout'
 import FloorLayout from './FloorLayout'
-import {FiInfo} from 'react-icons/fi'
+import {AiFillInfoCircle, AiOutlineInfoCircle} from 'react-icons/ai'
 
 
 const FloorModal = ({ slides, activeId, activeMapId, isOpen, handleClose, role }) => {
@@ -72,8 +72,13 @@ const FloorModal = ({ slides, activeId, activeMapId, isOpen, handleClose, role }
                     >
                         <div className='flex items-center space-x-3'>
                         <h3>Floor</h3>
-                        {role === 'admin' && <FiInfo className='hover:opacity-50' onClick={handleInfo}/>}
-                        </div>
+                        {role === 'admin' && (
+                            info ? (
+                                <AiFillInfoCircle className='hover:opacity-50' onClick={handleInfo} />
+                            ) : (
+                                <AiOutlineInfoCircle className='hover:opacity-50' onClick={handleInfo} />
+                            )
+                        )}                          </div>
                         <Close onClick={handleClose} />
                     </Dialog.Title>
                     {info ? 

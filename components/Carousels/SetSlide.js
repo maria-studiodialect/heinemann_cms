@@ -3,7 +3,7 @@ import { Fragment, useState, useEffect } from 'react'
 import CarouselLayout from './CarouselLayout'
 import { Close } from '../common/icons/Close'
 import { IoIosRadioButtonOff, IoIosCheckmarkCircle } from 'react-icons/io'
-import {FiInfo} from 'react-icons/fi'
+import {AiFillInfoCircle, AiOutlineInfoCircle} from 'react-icons/ai'
 
 const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose, role }) => {
     const [selectedSlideId, setSelectedSlideId] = useState(null);
@@ -82,7 +82,13 @@ const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose, role }) 
                         
                         <div className='flex items-center space-x-3'>
                         <h3>Screen {activeMapId}</h3>
-                        {role === 'admin' && <FiInfo className='hover:opacity-50' onClick={handleInfo}/>}
+                        {role === 'admin' && (
+                            info ? (
+                                <AiFillInfoCircle className='hover:opacity-50' onClick={handleInfo} />
+                            ) : (
+                                <AiOutlineInfoCircle className='hover:opacity-50' onClick={handleInfo} />
+                            )
+                        )}                        
                         </div>
                         <Close onClick={handleClose} />
                     </Dialog.Title>
