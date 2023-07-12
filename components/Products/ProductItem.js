@@ -17,7 +17,7 @@ const ProductItem = ({ id, title, brand, rfid_copenhagen, rfid_istanbul, product
   }, [user])
 
   return (
-    <div className={`my-2 grid ${role !== 'admin' ? 'grid-cols-[2fr_1fr_1fr_1fr]' : 'grid-cols-[2fr_1fr_1fr_0.1fr_0.5fr]'} cursor-pointer rounded-md border px-3 py-4 shadow-sm hover:shadow-md lg:px-6`}>
+    <div className={`my-2 grid ${role !== 'admin' ? 'grid-cols-[2fr_1fr_1fr_1fr]' : 'grid-cols-[2fr_1fr_1fr_0.1fr_0.5fr]'} cursor-pointer rounded-md border border-gray-200 border-solid px-3 py-4 shadow-sm hover:shadow-md lg:px-6`}>
       {router.pathname !== '/products_simple' ? <Link href={`/product/${id}`}><p className="flex-1 truncate font-medium hover:underline">{title}</p></Link> : <p className="flex-1 truncate font-medium">{title}</p>}
       <p className="flex-1 text-right lg:text-left">{brand.title}</p>
       <p className="flex-1 text-right lg:text-left">{product_type}</p>
