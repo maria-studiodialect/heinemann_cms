@@ -95,7 +95,7 @@ const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose, role }) 
                     {info ? 
                     <div>
                         <div className="mb-1 block text-sm font-medium">Config Profile</div>
-                        <div className='border rounded-md p-3'>
+                        <div className='border border-gray-200 border-solid rounded-md p-3'>
                             <div><span className='font-medium text-gray-400'>Location:</span> {config.location.name}</div>
                             <div><span className='font-medium text-gray-400'>Map Position:</span> {config.map_position_id}</div>
                             <div><span className='font-medium text-gray-400'>IP Address:</span> {config.ip}</div>
