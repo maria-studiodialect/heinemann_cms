@@ -61,7 +61,7 @@ function Products() {
         <div className="text-2xl font-bold text-black">Products</div>
         <input
           placeholder="Search"
-          className='rounded-full flex-1 mx-40 shadow px-4 py-1.5'
+          className='rounded-full flex-1 mx-40 border-0 shadow px-4 py-1.5'
           onChange={handleSearch}
         />
         {role === 'admin' &&
