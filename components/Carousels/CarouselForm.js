@@ -5,6 +5,7 @@ import Input from '../common/Input'
 import FormSection from '../ProductForm/Section';
 import MediaUpload from '../ProductForm/MediaUpload';
 import SingleUploadcare from '../ProductForm/SingleUploadcare';
+import MediaUploadCare from '../ProductForm/MediaUploadcare';
 
 const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...props }) => {
   const [brands, setBrands] = useState([]);
@@ -41,7 +42,7 @@ const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...pro
     reset()
   })
 
-
+  console.log(defaultValues)
   let slide_type = watch('slide_type'); 
 
   
@@ -74,6 +75,7 @@ const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...pro
           />
         }
         {slide_type === 'intro' ?
+        <>
         <Input
           name="title_text"
           label='Title'
@@ -81,7 +83,7 @@ const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...pro
           error={errors.title_text ? errors.title_text.message : false}
           register={register('title_text')}
         />
-        
+        </>
         :
         <div className='mb-4'>
         <label htmlFor="logo" className="mb-1 block text-sm font-medium text-gray-600">Title Logo</label>
@@ -93,15 +95,19 @@ const CarouselForm = ({ type, location, defaultValues = {}, onFormSubmit, ...pro
 
         <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">Text</label>
         {slide_type === 'intro' ? 
+        <>
           <textarea {...register('line_1')} name='line_1' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1 min-h-[15vh]'/>
+          <label htmlFor="logo" className="mb-1 block text-sm font-medium text-gray-600">Partner Logos</label>
+          <MediaUploadCare defaultValues={defaultValues?.partner_logos} setValue={setValue} value='partner_logos' />
+        </>
         :
         <>
-          <input {...register('line_1')} name='line_1' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
-          <input {...register('line_2')} name='line_2' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
-          <input {...register('line_3')} name='line_3' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
-          <input {...register('line_4')} name='line_4' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
-          <input {...register('line_5')} name='line_5' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
-          <input {...register('line_6')} name='line_6' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1'/>
+          <input {...register('line_1')} name='line_1' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1' maxlength="45"/>
+          <input {...register('line_2')} name='line_2' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1' maxlength="45"/>
+          <input {...register('line_3')} name='line_3' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1' maxlength="45"/>
+          <input {...register('line_4')} name='line_4' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1' maxlength="45"/>
+          <input {...register('line_5')} name='line_5' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1' maxlength="45"/>
+          <input {...register('line_6')} name='line_6' className='border border-gray-300 rounded-md mb-1 w-full px-2 text-sm py-1' maxlength="45"/>
           </>
         }
         <input type='hidden' name='location' {...register('location')} value={location}/>

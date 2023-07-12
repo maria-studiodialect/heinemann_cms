@@ -10,7 +10,6 @@ const AddProduct = ({ props }) => {
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
   const onFormSubmit = async (data) => {
-    console.log(data)
     try {
       await fetch(`/api/products/createProduct`, {
         method: 'POST',

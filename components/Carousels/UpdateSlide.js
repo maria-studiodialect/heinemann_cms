@@ -9,7 +9,6 @@ import CarouselForm from './CarouselForm'
 const UpdateSlide = ({ location, product, updateIsOpen, handleClose, ...props }) => {
 
   const onFormSubmit = async (data) => {
-    console.log(data)
     try {
       await fetch(`/api/carousels/updateSlide`, {
         method: 'PUT',

@@ -40,6 +40,7 @@ export default function Infrastor(props) {
     setRole(user?.app_metadata.roles[0])
   }, [user])
 
+  console.log(user.app_metadata )
 
   const handleClose = () => setIsOpen(false)
   const handleFloorClose = () => setIsFloorOpen(false)

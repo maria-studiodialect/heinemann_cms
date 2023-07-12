@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import UpdateProduct from '../Product/UpdateProduct';
 import DeleteProduct from '../Product/DeleteProduct';
+import { AuthContext } from '../../stores/authContext';
+
 
 function FloorLayout({ mainSlide }) {
     const [slide, setSlide] = useState(mainSlide);
     const [isEditing, setIsEditing] = useState({});
+    const {user} = useContext(AuthContext)
+    const [role, setRole] = useState(null)
 
+
+    useEffect(() => {
+        setRole(user?.app_metadata.roles[0])
+    }, [user])
     const handleFieldClick = (field) => {
-        setIsEditing({ ...isEditing, [field]: true });
+        if (role !== 'reader') {
+            setIsEditing({ ...isEditing, [field]: true });
+        }
     };
     
     const handleFieldBlur = async (field, value) => {

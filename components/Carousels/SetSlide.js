@@ -106,6 +106,20 @@ const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose, role }) 
                     </div>
                     :
                     <>
+                    {role === 'reader' ?
+                    <>
+                    <div className="mb-1 block text-sm font-medium">Selected brand slide</div>
+                    <div className="grid grid-cols-3 p-3 gap-3 border rounded-md">
+                    {slides.filter(slide => slide.id === selectedSlideId).map((slide, i) => (
+                        <div key={i} className={`cursor-pointer px-2 pt-2 ${selectedSlideId === slide.id && 'bg-white shadow rounded-lg'}`} onClick={() => onSelect(slide.id)}>
+                        <CarouselLayout mainSlide={slide}/>
+                        <div className="text-center my-1 text-xs flex items-center"><div className='flex-1'>{slide.brand}</div></div>
+                        </div>
+                    ))}
+                    </div>
+                    </>
+                    :
+                    <>
                     <div className="mb-1 block text-sm font-medium">Select the relevant brand slide</div>
                     <div className="grid grid-cols-3 p-3 gap-3 border rounded-md">
                     {slides.filter(slide => slide.slide_type === 'brand').map((slide, i) => (
@@ -116,6 +130,9 @@ const SetSlide = ({ slides, activeId, activeMapId, isOpen, handleClose, role }) 
                     ))}
                     </div>
                     </>
+                    }
+                    </>
+                    
                     }
                     </FocusTrap>
                     </Dialog.Panel>

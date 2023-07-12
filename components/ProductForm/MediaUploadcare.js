@@ -23,9 +23,9 @@ const MediaUploadCare = ({ defaultValues, setValue, value }) => {
         tabs='file url'
         onFileSelect={async (group) => {
           const files = await Promise.all(group.files());
-          const urls = files.map((file) => file.cdnUrl);
+          const urls = files.map((file) => file.cdnUrl + file.name);
           setValue(value, urls);
-          console.log(urls)
+          console.log(files)
         }}
         // Additional widget configuration options can be specified here
       />

@@ -98,10 +98,10 @@ function EditableProduct({ mainProduct }) {
         }
         <div className="max-w-lg text-center"> 
             <div className="relative mb-8 w-[10vw] mx-auto">
-                  <Image src={product.brand.logo} width={537} height={324} onLoadingComplete={e => setMeasurements(e)} className="w-full h-auto object-contain max-h-[20vh]"/>
+                  <Image src={product.brand.logo} alt={product.brand.name} width={537} height={324} onLoadingComplete={e => setMeasurements(e)} className="w-full h-auto object-contain max-h-[20vh]"/>
             </div>
             {product.video && product.media &&
-              <video autoPlay muted loop className='mb-5'>
+              <video autoPlay muted loop className='mb-5 px-[3vw]'>
                 <source src={product.media[0]} />
               </video>
             }

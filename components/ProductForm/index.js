@@ -20,21 +20,6 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
   } = useForm();
 
   useEffect(() => {
-    if (defaultValues) {
-      setValue('title', defaultValues.title);
-      setValue('description', defaultValues.description);
-      setValue('media', defaultValues.media);
-      setValue('product_type', defaultValues.product_type);
-      if (defaultValues.attributes) {
-        const attributesString = defaultValues.attributes.join(', ');
-        setValue('attributes', attributesString);
-      }
-      setValue('brand', defaultValues.brand);
-      setValue('video', defaultValues.video);
-    }
-  }, [defaultValues, setValue, setIsChecked]);
-
-  useEffect(() => {
     fetchBrands();
   }, []);
 
@@ -44,13 +29,29 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     const result = await response.json();
     setBrands(result.data);
   };
+  useEffect(() => {
+    if (defaultValues) {
+      setValue('title', defaultValues.title);
+      setValue('description', defaultValues.description);
+      setValue('media', defaultValues.media);
+      setValue('product_type', defaultValues.product_type);
+      if (defaultValues.attributes) {
+        const attributesString = defaultValues.attributes.join(', ');
+        setValue('attributes', attributesString);
+      }
+      setValue('brand', defaultValues.brand.id);
+      setValue('video', defaultValues.video);
+    }
+  }, [defaultValues, setValue, setIsChecked]);
+
+
 
   const handleCheck = (e) => {
     setIsChecked(e.target.checked);
   }
 
   const onSubmit = handleSubmit(async (data) => {
-    const attributesArray = data.attributes.split(',').map((value) => value.trim());
+    const attributesArray = data.attributes?.split(',').map((value) => value.trim());
 
     // Update the data object with the converted attributes array
     const updatedData = { ...data, attributes: attributesArray };
@@ -58,10 +59,8 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     // Call the onFormSubmit function with the updated data
     await onFormSubmit(updatedData);
   });
-
-
-  console.log('Default Values', defaultValues.video)
-  console.log('Default Values', defaultValues.video)
+  
+  console.log(brands)
 
   return (
     <div {...props} className="flex flex-col space-y-4">
@@ -111,6 +110,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
             },
           })}
         />
+        {(brands && defaultValues) && 
           <div className="mb-2">
             <label htmlFor="brand" className="mb-1 block text-sm font-medium text-gray-600">
               Brand
@@ -118,9 +118,10 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
             <select
               {...register('brand')}
               name="brand"
-              defaultValue={defaultValues?.brand?.title}
+              defaultValue={defaultValues?.brand?.id}
               className="border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2"
             >
+            {console.log("defaultValue prop value:", defaultValues?.brand.id)}
               <option disabled value="">
                 Select brand
               </option>
@@ -131,6 +132,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
               ))}
             </select>
           </div>
+          }
         </div>
         {!isChecked && (
           <>

@@ -18,7 +18,7 @@ const ProductHeader = () => {
       <div className="flex-1 text-right font-semibold lg:text-left">
         Product Range
       </div>
-      {role !== 'admin' && (
+      {(role !== 'admin' && role !== 'reader') && (
       <div className="flex-1 text-right font-semibold lg:text-left">
         RFID
       </div>

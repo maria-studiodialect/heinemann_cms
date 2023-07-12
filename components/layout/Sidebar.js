@@ -69,7 +69,7 @@ const Sidebar = () => {
           }
           </div>
           <div  className='mx-auto'>
-          {role === 'admin' &&           <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> Locations</Link>}  
+          {(role === 'admin' || role === 'reader') &&           <Link href={'/locations'} className={`${linkClass('/locations')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> Locations</Link>}  
           {role === 'copenhagen' &&           <Link href={'/copenhagen'} className={`${linkClass('/copenhagen')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoMap className='mr-3 text-xl'/> CPH</Link>}  
 
           <Link href={'/brands'} className={`${linkClass('/brands')} px-4 py-3 hover:text-black hover:font-bold mx-2 flex`}><IoBagHandle className='mr-3 text-xl'/> Brands</Link>
