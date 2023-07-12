@@ -39,7 +39,7 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
         const attributesString = defaultValues.attributes.join(', ');
         setValue('attributes', attributesString);
       }
-      setValue('brand', defaultValues.brand.id);
+      setValue('brand', defaultValues.brand?.id);
       setValue('video', defaultValues.video);
     }
   }, [defaultValues, setValue, setIsChecked]);
@@ -60,7 +60,6 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
     await onFormSubmit(updatedData);
   });
   
-  console.log(brands)
 
   return (
     <div {...props} className="flex flex-col space-y-4">
@@ -121,7 +120,6 @@ const ProductForm = ({ type, defaultValues = {}, onFormSubmit, ...props }) => {
               defaultValue={defaultValues?.brand?.id}
               className="border border-gray-300 border-solid px-4 py-2.5 rounded-md w-full focus:ring-2"
             >
-            {console.log("defaultValue prop value:", defaultValues?.brand.id)}
               <option disabled value="">
                 Select brand
               </option>

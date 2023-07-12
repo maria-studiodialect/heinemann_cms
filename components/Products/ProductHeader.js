@@ -10,7 +10,7 @@ const ProductHeader = () => {
   }, [user])
 
   return (
-    <div className={`cursor-loading mt-6 mb-3 grid ${role !== 'admin' ? 'grid-cols-[2fr_1fr_1fr_1fr]' : 'grid-cols-[2fr_1fr_1fr_0.1fr_0.5fr]'} rounded-md border px-5 py-3 shadow-sm lg:px-8`}>
+    <div className={`cursor-loading mt-6 mb-3 grid ${role !== 'admin' ? 'grid-cols-[2fr_1fr_1fr_1fr]' : 'grid-cols-[2fr_1fr_1fr_0.1fr_0.5fr]'} rounded-md border border-[#e5e7eb] border-solid px-5 py-3 shadow-sm lg:px-8`}>
       <div className="flex-1 font-semibold">Title</div>
       <div className="flex-1 text-right font-semibold lg:text-left">
         Brand
